@@ -5,14 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GTA Market Explorer · Verified TRREB Market Watch Data 2016 - May 2026</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Spline+Sans+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700;800;900&family=Spline+Sans+Mono:wght@400;500;600&display=swap');
 :root{
   --bg:#F6F7FB; --card:#FFFFFF; --ink:#0E1526; --muted:#61697E; --line:#E6E9F2;
-  --price:#2E5BFF; --sales:#8B5CF6; --teal:#0891B2; --amber:#D97706;
+  --price:#1B4F8A; --sales:#8B5CF6; --teal:#0891B2; --amber:#D97706;
   --up:#0CA678; --down:#E5484D; --ok:#047857; --ok-bg:#D1FAE5;
   --radius:18px;
   --mono:'Spline Sans Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-  --sans:'Archivo',-apple-system,'Segoe UI',Roboto,sans-serif;
+  --sans:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;
+  --display:'Archivo',-apple-system,'Segoe UI',Roboto,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;padding:clamp(14px,3vw,40px)}
@@ -20,7 +21,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1
 header{margin-bottom:22px}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .eyebrow::before{content:"";width:26px;height:2px;background:var(--price)}
-h1{font-size:clamp(26px,4.6vw,42px);font-weight:760;font-stretch:115%;letter-spacing:-.02em;line-height:1.08;margin:10px 0 6px}
+h1{font-family:var(--display);font-size:clamp(26px,4.6vw,42px);font-weight:760;font-stretch:115%;letter-spacing:-.02em;line-height:1.08;margin:10px 0 6px}
 .sub{color:var(--muted);font-size:15px;max-width:700px}
 .badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;padding:3px 9px;border-radius:999px;font-weight:600}
 .badge.real{background:var(--ok-bg);color:var(--ok)}
@@ -63,7 +64,7 @@ svg{display:block;width:100%;height:auto}
 .dot{width:9px;height:9px;border-radius:3px;display:inline-block}
 .metric-note{font-size:11.5px;color:var(--muted);padding:4px 4px 2px;font-style:italic}
 
-.analysis h2{font-size:17px;font-weight:740;font-stretch:112%;margin-bottom:4px}
+.analysis h2{font-family:var(--display);font-size:17px;font-weight:740;font-stretch:112%;margin-bottom:4px}
 .analysis .seg-name{color:var(--price)}
 .analysis h3{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:16px 0 5px}
 .analysis p{font-size:14.5px;max-width:76ch}
@@ -77,6 +78,101 @@ footer{font-size:12px;color:var(--muted);max-width:780px;line-height:1.65;margin
 @media(max-width:880px){.kpis{grid-template-columns:repeat(3,1fr)}.sel-grid{grid-template-columns:1fr}.panel-head{align-items:flex-start}.controls{align-items:flex-start}}
 @media(max-width:480px){.kpis{grid-template-columns:repeat(2,1fr)}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ============ PRINT BUTTON ============ */
+@keyframes print-glint{0%,65%,100%{color:#4A5E72;filter:none}80%{color:#1B4F8A;filter:drop-shadow(0 0 3px #1B4F8A80)}}
+#printBtn{display:inline-flex;align-items:center;justify-content:center;color:#4A5E72;border:1px solid #C8D4DF;border-radius:8px;padding:6px 8px;background:#F0F4F8;cursor:pointer;transition:background .15s,border-color .15s,color .15s;animation:print-glint 5s ease-in-out infinite}
+#printBtn:hover{background:#DDE6F2;border-color:#A0B4C8;color:#0B1D38;animation:none}
+#printBtn:focus-visible{outline:2px solid var(--price);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){#printBtn{animation:none}}
+
+/* ============ PRINT PAGE ============ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+#printPage{display:none}
+.pp{width:816px;height:1056px;font-family:'Inter',Arial,sans-serif;background:#fff;display:flex;flex-direction:column}
+.pp *{box-sizing:border-box;margin:0;padding:0}
+.pp-hdr{background:#0a2a51;padding:14px 34px 12px;flex-shrink:0}
+.pp-hdr-top{display:flex;justify-content:space-between;align-items:center}
+.pp-city{font-size:27px;font-weight:800;color:#fff;letter-spacing:.2px}
+.pp-meta{font-size:14px;color:rgba(255,255,255,.65);margin-left:13px}
+.pp-badge{border-radius:6px;padding:8px 20px}
+.pp-badge span{font-size:14px;font-weight:800;color:#fff;letter-spacing:.6px;text-transform:uppercase}
+.pp-src{font-size:12px;color:rgba(255,255,255,.5);margin-top:7px}
+.pp-tbar{height:4px;background:#1B4F8A;flex-shrink:0}
+.pp-stats{background:#F4F7FC;padding:14px 34px;display:grid;grid-template-columns:repeat(5,1fr);gap:11px;border-bottom:1px solid #E4EAF4;flex-shrink:0}
+.pp-sc{background:#fff;border:1px solid #DDE5F0;border-radius:9px;padding:13px 14px}
+.pp-sc.hl{border-top:4px solid #1B4F8A}
+.pp-sc-l{font-size:11px;color:#6B7A90;text-transform:uppercase;letter-spacing:.4px;font-weight:600;margin-bottom:7px}
+.pp-sc-v{font-size:23px;font-weight:800;color:#0a2a51;line-height:1}
+.pp-sc-v span{font-size:14px;font-weight:500;color:#6B7A90}
+.pp-sc-c{font-size:13px;margin-top:6px;font-weight:600}
+.pp-up{color:#1E8449}.pp-dn{color:#C0392B}.pp-mu{color:#6B7A90}
+.pp-body{flex:1;display:grid;grid-template-columns:1fr 1fr;min-height:0;overflow:hidden}
+.pp-col{padding:16px 30px;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+.pp-col-l{border-right:1px solid #E4EAF4}
+.pp-sec{font-size:12px;color:#0a2a51;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:13px;padding-bottom:7px;border-bottom:2px solid #1B4F8A;display:inline-block;align-self:flex-start}
+.pp-types{display:flex;flex-direction:column}
+.pp-tr{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid #EEF2F7}
+.pp-tr-l{display:flex;align-items:center;gap:13px}
+.pp-ic{width:40px;height:40px;background:#EAF1FB;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pp-tn{font-size:15.5px;color:#2D3748;font-weight:500}
+.pp-tv{font-size:17px;font-weight:800;color:#0a2a51}
+.pp-tc{font-size:13px;margin-left:9px;font-weight:600}
+.pp-cta{margin-top:14px;background:#0a2a51;border-radius:11px;padding:16px 18px;flex:1;display:flex;flex-direction:column}
+.pp-cta-h{font-size:12px;color:#7FB0E8;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:10px}
+.pp-cta-t{font-size:14px;color:#E8EEF5;line-height:1.6;margin:0 0 12px}
+.pp-cta-t strong{color:#fff}
+.pp-cta-d{height:1px;background:rgba(255,255,255,.14);margin-bottom:12px}
+.pp-cta-hook{font-size:14px;color:#E8EEF5;line-height:1.6;margin:0 0 14px}
+.pp-cta-hook em{color:#fff;font-style:normal;font-weight:600}
+.pp-cta-btn{margin-top:auto;background:#1B4F8A;border-radius:8px;padding:13px;text-align:center}
+.pp-cta-btn span{font-size:15px;font-weight:700;color:#fff;letter-spacing:.3px}
+.pp-reads{display:flex;flex-direction:column;flex:1}
+.pp-buy{background:#EAF1FB;border-left:4px solid #1B4F8A;padding:15px 17px;margin-bottom:13px;flex:1}
+.pp-sell{background:#FDF4E7;border-left:4px solid #B45309;padding:15px 17px;flex:1}
+.pp-bl{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:9px}
+.pp-buy .pp-bl{color:#0C447C}.pp-sell .pp-bl{color:#8A5108}
+.pp-bt{font-size:15px;line-height:1.7;margin:0}
+.pp-buy .pp-bt{color:#1A2A3F}.pp-sell .pp-bt{color:#3D2A14}
+.pp-cities{display:grid;grid-template-columns:1fr 1fr;background:#F4F7FC;border-bottom:1px solid #E4EAF4;flex-shrink:0}
+.pp-cty{padding:14px 30px 15px}
+.pp-cty-l{border-right:1px solid #E4EAF4}
+.pp-cty-h{display:flex;align-items:center;gap:10px;margin-bottom:13px}
+.pp-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+.pp-cty-n{font-size:19px;font-weight:800;color:#0a2a51}
+.pp-cty-ty{font-size:13px;color:#6B7A90;font-weight:500}
+.pp-grid4{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:11px}
+.pp-csc{background:#fff;border:1px solid #DDE5F0;border-radius:8px;padding:11px 13px}
+.pp-csc-l{font-size:11px;color:#6B7A90;text-transform:uppercase;font-weight:600;margin-bottom:6px}
+.pp-csc-v{font-size:21px;font-weight:800;color:#0a2a51;line-height:1}
+.pp-csc-v span{font-size:12px;font-weight:500;color:#6B7A90}
+.pp-csc-c{font-size:12px;margin-top:5px;font-weight:600}
+.pp-splp{background:#fff;border:1px solid #DDE5F0;border-radius:8px;padding:11px 13px}
+.pp-splp-l{font-size:11px;color:#6B7A90;text-transform:uppercase;font-weight:600;margin-bottom:4px}
+.pp-splp-v{font-size:21px;font-weight:800;color:#0a2a51}
+.pp-splp-v span{font-size:13px;font-weight:500;color:#6B7A90}
+.pp-chdr{background:#0a2a51;padding:13px 34px 11px;text-align:center;flex-shrink:0}
+.pp-chdr-m{font-size:12px;color:rgba(255,255,255,.5);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:7px}
+.pp-chdr-t{font-size:25px;font-weight:800;color:#fff;letter-spacing:.2px}
+.pp-chdr-s{font-size:12px;color:rgba(255,255,255,.5);margin-top:7px}
+.pp-ccta-t{font-size:14px;color:#E8EEF5;line-height:1.65;margin:0 0 12px}
+.pp-ccta-hook{font-size:14px;color:#E8EEF5;line-height:1.65;margin:0 0 14px}
+.pp-cbt{font-size:14px;line-height:1.6;margin:0}
+.pp-ft{background:#0a2a51;padding:16px 34px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-shrink:0}
+.pp-ft-n{font-size:22px;font-weight:900;color:#fff;line-height:1.15}
+.pp-ft-s{font-size:13.5px;color:#A9BCD0;margin-top:3px}
+.pp-ft-p{font-size:17px;font-weight:700;color:#7FB0E8;margin-top:8px}
+.pp-ft-dv{width:1px;height:70px;background:rgba(255,255,255,.14);flex-shrink:0}
+.pp-ft-q{display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0}
+.pp-ft-q img{width:68px;height:68px;border-radius:6px;display:block;background:#fff}
+.pp-ft-ql{font-size:11px;color:#7088A0}
+.pp-ft-dc{text-align:right;font-size:11px;color:#7088A0;line-height:1.7}
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  .wrap{display:none!important}
+  #printPage{display:block!important;margin:0;padding:0;background:#fff}
+  @page{margin:0;size:letter portrait}
+}
 
 /* ============ MODE TOGGLE ============ */
 .mode-toggle{display:flex;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px;gap:0;margin-bottom:18px}
@@ -118,7 +214,7 @@ footer{font-size:12px;color:var(--muted);max-width:780px;line-height:1.65;margin
 
 /* compare analysis */
 .cmp-verdict{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px}
-.cmp-verdict h2{font-size:17px;font-weight:740;font-stretch:112%;margin-bottom:12px}
+.cmp-verdict h2{font-family:var(--display);font-size:17px;font-weight:740;font-stretch:112%;margin-bottom:12px}
 .cmp-verdict .verdict-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .cmp-verdict .v-col h3{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 .cmp-verdict .v-col p{font-size:13.5px}
@@ -132,7 +228,7 @@ footer{font-size:12px;color:var(--muted);max-width:780px;line-height:1.65;margin
 
 /* ---- plain language market read ---- */
 .market-read{padding:4px 0}
-.read-title{font-size:17px;font-weight:740;font-stretch:112%;margin-bottom:12px}
+.read-title{font-family:var(--display);font-size:17px;font-weight:740;font-stretch:112%;margin-bottom:12px}
 .read-seg{color:var(--price)}
 .bottom-line{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-radius:12px;font-size:14.5px;margin-bottom:14px;line-height:1.5}
 .bl-icon{font-size:18px;flex:0 0 auto;margin-top:1px}
@@ -150,7 +246,7 @@ footer{font-size:12px;color:var(--muted);max-width:780px;line-height:1.65;margin
 
 
 .health-section{margin-top:18px}
-.health-head{font-size:17px;font-weight:740;font-stretch:112%;color:var(--ink);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.health-head{font-family:var(--display);font-size:17px;font-weight:740;font-stretch:112%;color:var(--ink);margin-bottom:14px;display:flex;align-items:center;gap:10px}
 .health-head::before{content:'';width:22px;height:3px;background:#F2A93B;border-radius:2px;flex:0 0 auto;align-self:center}
 .health-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .health-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
@@ -216,7 +312,9 @@ footer{font-size:12px;color:var(--muted);max-width:780px;line-height:1.65;margin
   </div>
   <div style="padding-top:10px;border-top:1px solid var(--line);margin-top:10px;display:flex;align-items:center;gap:10px">
     <a id="mapsLink" href="#" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--price);border:1px solid #B5D4F4;border-radius:10px;padding:6px 13px;background:#EAF1FB;text-decoration:none;font-weight:600">&#128205; View on Google Maps</a>
-    <span style="font-size:12px;color:var(--muted)">Opens in a new tab</span>
+    <button id="printBtn" onclick="buildAndPrint()" title="Print or save as PDF" aria-label="Print market report">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    </button>
   </div>
   <div class="sel-note" id="selNote"></div>
 </section>
@@ -256,6 +354,8 @@ footer{font-size:12px;color:var(--muted);max-width:780px;line-height:1.65;margin
   Sources: Toronto Regional Real Estate Board, <i>Market Watch</i>  -  December editions 2016-2025 (full-year summaries and MLS® HPI tables) and all monthly editions June 2023 - May 2026 (monthly summaries, "Mos. Inv. (Trend)", and MLS® HPI tables); 2026 annual figures cover January-May and are compared with the same period of 2025. Figures as originally published; TRREB has since revised some historic totals after new PropTx boards joined, so small differences from TRREB's current site are expected. Monthly figures are not seasonally adjusted. Property-type prices use the MLS® HPI benchmark, TRREB's quality-adjusted price measure. Educational tool  -  not financial, investment or legal advice. Prepared June 2026.
 </footer>
 </div>
+
+<div id="printPage"></div>
 
 <script>
 /* ---- Verified TRREB Market Watch data (as published) ---- */
@@ -667,7 +767,7 @@ function buildCmpSelects(){
   var aa=cmpState.filter(function(s){return s.active;}).map(function(s){return (AREA_LABELS_MAP[s.area]||s.area).replace(/—.*/,'').replace(/[(].*/,'').trim();});
   const md=document.createElement('div');md.style.cssText='padding-top:10px;border-top:1px solid var(--line);margin-top:10px;display:flex;align-items:center;gap:10px';
   var mapsUrl='https://www.google.com/maps/dir/'+aa.map(function(c){return encodeURIComponent(c+', Ontario');}).join('/');
-  md.innerHTML='<a href="'+mapsUrl+'" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--price);border:1px solid #B5D4F4;border-radius:10px;padding:6px 13px;background:#EAF1FB;text-decoration:none;font-weight:600">&#128205; View '+aa.join(' vs ')+' on Google Maps</a><span style="font-size:12px;color:var(--muted)">Opens in a new tab</span>';
+  md.innerHTML='<a href="'+mapsUrl+'" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--price);border:1px solid #B5D4F4;border-radius:10px;padding:6px 13px;background:#EAF1FB;text-decoration:none;font-weight:600">&#128205; View '+aa.join(' vs ')+' on Google Maps</a><button onclick="buildAndPrint()" title="Print or save as PDF" aria-label="Print market report" style="display:inline-flex;align-items:center;justify-content:center;color:#4A5E72;border:1px solid #C8D4DF;border-radius:8px;padding:6px 8px;background:#F0F4F8;cursor:pointer;animation:print-glint 5s ease-in-out infinite"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></button>';
   cp.appendChild(md);
   ['cmpChartPanel','cmpKpis','cmpVerdict','cmpHealth','cmpProfiles'].forEach(function(id){const d=document.createElement('section');if(id==='cmpChartPanel')d.className='cmp-chart-panel';else if(id==='cmpVerdict')d.className='cmp-verdict';d.id=id;cp.appendChild(d);});
 }
@@ -1097,6 +1197,234 @@ function renderEconomicIndicators(containerId,view){
   out+='</div><p style="font-size:11px;color:var(--muted);margin-top:8px">Sources: Bank of Canada, Statistics Canada. National and Toronto CMA indicators.</p></div>';
   el.innerHTML=out;
 }
+
+/* ============================================================
+   PRINT MARKET REPORT
+   ============================================================ */
+function buildAndPrint(){
+  var cmpPanel=document.getElementById('comparePanel');
+  if(cmpPanel&&cmpPanel.classList.contains('active')){buildAndPrintCompare();return;}
+  var ms=monthlySeries();
+  var L=ms.length?ms[ms.length-1]:null;
+  if(!L||!L.price){alert('No data available for this selection. Try a different area or property type.');return;}
+  var yPrev=ms.length>12?ms[ms.length-13]:null;
+  var cityName=(AREA_LABELS_MAP[state.area]||state.area).replace(/ - .*/,'').replace(/\(.*$/,'').trim();
+  var typeName=state.type;
+  var moi=L.moi;
+  var condLabel=moi!=null?(moi<2.5?"Seller's Market":moi>4?"Buyer's Market":"Balanced Market"):"Market";
+  var condBg=moi!=null?(moi<2.5?"#B45309":moi>4?"#047857":"#3730A3"):"#4A5568";
+  var pk=function(v){return v!=null?(v>=1e6?'$'+(v/1e6).toFixed(2)+'M':'$'+Math.round(v/1000)+'K'):'n/a';};
+  var chgStr=function(now,old){if(now==null||old==null)return '';var d=(now/old-1)*100;return (d>=0?'\u2191 ':'\u2193 ')+Math.abs(d).toFixed(1)+'% yr/yr';};
+  var chgCls=function(now,old,hi){if(now==null||old==null)return 'pp-mu';return ((now>=old)===hi)?'pp-up':'pp-dn';};
+  var ymL=L.ym?ymLabel(L.ym):'';
+
+  var icons={
+    det:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B4F8A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+    att:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B4F8A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="10" height="16" rx="1"/><rect x="13" y="6" width="10" height="16" rx="1"/><path d="M1 10h10M13 10h10"/></svg>',
+    twn:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B4F8A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 22V9l4-4 4 4v13"/><path d="M9 22V9l4-4 4 4v13"/><path d="M17 22v-8"/><line x1="1" y1="22" x2="23" y2="22"/></svg>',
+    apt:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B4F8A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="1"/><line x1="5" y1="14" x2="19" y2="14"/><path d="M9 22v-3h6v3"/></svg>'
+  };
+
+  var rawMData=MDATA[state.area]||[];
+  var ld=rawMData.length?rawMData[rawMData.length-1]:null;
+  var ld12=rawMData.length>12?rawMData[rawMData.length-13]:null;
+  var typeList=[{label:'Detached',key:'det'},{label:'Semi-Detached',key:'att'},{label:'Townhouse',key:'twn'},{label:'Condo Apartment',key:'apt'}];
+  var typeRows='';
+  typeList.forEach(function(t){
+    var v=ld&&ld.hpi?ld.hpi[t.key]:null;
+    if(v==null)return;
+    var vp=ld12&&ld12.hpi?ld12.hpi[t.key]:null;
+    var yPct='';
+    if(vp){var d=(v/vp-1)*100;yPct='<span class="pp-tc '+(d>=0?'pp-up':'pp-dn')+'">'+(d>=0?'\u2191':'\u2193')+Math.abs(d).toFixed(1)+'%</span>';}
+    typeRows+='<div class="pp-tr"><div class="pp-tr-l"><div class="pp-ic">'+icons[t.key]+'</div><span class="pp-tn">'+t.label+'</span></div><div><span class="pp-tv">'+pk(v)+'</span>'+yPct+'</div></div>';
+  });
+  if(!typeRows) typeRows='<p style="font-size:14px;color:#9CA3AF;padding:10px 0">MLS\u00ae HPI by type not published for this area.</p>';
+
+  var detV=ld&&ld.hpi?ld.hpi.det:null, aptV=ld&&ld.hpi?ld.hpi.apt:null;
+  var didYouKnow='';
+  if(detV&&aptV&&aptV>0){
+    var ratio=(detV/aptV).toFixed(1);
+    didYouKnow='A detached home in '+cityName+' costs <strong>'+ratio+'\u00d7 more</strong> than a condo apartment \u2014 a striking gap. First-time buyers have real options right now, and move-up buyers have leverage they haven\u2019t had in years.';
+  } else {
+    var dr=L.dom!=null?Math.round(L.dom):null;
+    didYouKnow='Homes in '+cityName+' are spending about <strong>'+(dr?dr+' days':'a few weeks')+'</strong> on the market right now \u2014 a useful signal for timing your next move.';
+  }
+
+  var domRound=L.dom!=null?Math.round(L.dom):null;
+  var splpVal=L.splp!=null?L.splp.toFixed(0):null;
+  var buyerPlain='', sellerPlain='';
+  if(moi!=null&&moi>4){
+    buyerPlain='You\u2019re in a strong position right now. With '+moi.toFixed(1)+' months of inventory there are more homes than buyers \u2014 so take your time, negotiate on price, and include conditions in your offer. Homes are selling at '+(splpVal?splpVal+'% of asking':'below asking')+', which means there\u2019s real room to work with. Get a home inspection, line up your financing, and compare a few options before you commit.';
+    sellerPlain='Buyers have plenty of choice right now, so pricing is everything. Homes are sitting about '+(domRound?domRound+' days':'longer')+' on average \u2014 but those priced right still sell. Come out at fair market value from day one; overpriced listings get ignored early and then ultimately sell for less. Strong presentation and staging matter more in a market like this.';
+  } else if(moi!=null&&moi<2.5){
+    buyerPlain='This is a competitive market. Homes are moving in about '+(domRound?domRound+' days':'very quickly')+' and selling '+(splpVal&&parseFloat(splpVal)>=100?'at or above asking':'close to asking')+'. Have your mortgage pre-approval ready before you start looking and be prepared to act quickly. Conditions may be difficult to include in a multiple-offer situation, so plan your strategy with your agent.';
+    sellerPlain='Demand is strong and you have the advantage. Homes are moving fast'+(domRound?' \u2014 about '+domRound+' days on average':'')+'. Price at fair market value rather than testing high \u2014 a realistic price generates more showings, more offers, and often a better final number than an inflated one.';
+  } else {
+    buyerPlain='The market is balanced, giving you a reasonable amount of choice and some room to negotiate. Homes are selling at '+(splpVal?splpVal+'% of asking':'close to asking')+' and sitting about '+(domRound?domRound+' days':'a few weeks')+' on average. Include conditions where your offer allows and don\u2019t feel rushed \u2014 but don\u2019t sit too long on a home you love either.';
+    sellerPlain='Neither side has a clear advantage right now. Homes are selling in about '+(domRound?domRound+' days':'a few weeks')+', which gives you time but not unlimited time. Price based on recent comparable sales. A well-presented, accurately priced home will still sell \u2014 but buyers are more willing to walk away if it feels overpriced.';
+  }
+
+  var priceChg=chgStr(L.price,yPrev?yPrev.price:null), priceCC=chgCls(L.price,yPrev?yPrev.price:null,true);
+  var salesChg=chgStr(L.sales,yPrev?yPrev.sales:null), salesCC=chgCls(L.sales,yPrev?yPrev.sales:null,true);
+  var domSub=yPrev&&yPrev.dom!=null?'was '+Math.round(yPrev.dom)+' a yr ago':'';
+  var splpSub=L.splp!=null?(L.splp>=100?'at or above asking':((100-L.splp).toFixed(0)+'% below ask')):'';
+
+  var h='<div class="pp">';
+  h+='<div class="pp-hdr"><div class="pp-hdr-top"><div><span class="pp-city">'+cityName+'</span><span class="pp-meta">Ontario \u00b7 '+ymL+(typeName!=='All types'?' \u00b7 '+typeName:' \u00b7 All Home Types')+'</span></div><div class="pp-badge" style="background:'+condBg+'"><span>'+condLabel+'</span></div></div><div class="pp-src">TRREB Market Watch 2026 \u00b7 Figures rounded \u00b7 MLS\u00ae HPI benchmark prices</div></div>';
+  h+='<div class="pp-tbar"></div>';
+  h+='<div class="pp-stats">';
+  h+='<div class="pp-sc hl"><div class="pp-sc-l">Benchmark</div><div class="pp-sc-v">'+pk(L.price)+'</div><div class="pp-sc-c '+priceCC+'">'+priceChg+'</div></div>';
+  h+='<div class="pp-sc"><div class="pp-sc-l">Sales</div><div class="pp-sc-v">'+(L.sales!=null?fmtN(L.sales):'n/a')+'</div><div class="pp-sc-c '+salesCC+'">'+salesChg+'</div></div>';
+  h+='<div class="pp-sc"><div class="pp-sc-l">Days on Mkt</div><div class="pp-sc-v">'+(domRound!=null?domRound:'n/a')+'<span> days</span></div><div class="pp-sc-c pp-mu">'+domSub+'</div></div>';
+  h+='<div class="pp-sc"><div class="pp-sc-l">Months Inv.</div><div class="pp-sc-v">'+(moi!=null?moi.toFixed(1):'n/a')+'<span> mo.</span></div><div class="pp-sc-c pp-up">'+condLabel.replace(' Market','')+'</div></div>';
+  h+='<div class="pp-sc"><div class="pp-sc-l">Sale / List</div><div class="pp-sc-v">'+(L.splp!=null?L.splp.toFixed(1):'n/a')+'<span>%</span></div><div class="pp-sc-c pp-mu">'+splpSub+'</div></div>';
+  h+='</div>';
+  h+='<div class="pp-body">';
+  h+='<div class="pp-col pp-col-l"><div class="pp-sec">MLS\u00ae HPI Benchmark Price by type</div><div class="pp-types">'+typeRows+'</div>';
+  h+='<div class="pp-cta"><div class="pp-cta-h">Did you know?</div><p class="pp-cta-t">'+didYouKnow+'</p><div class="pp-cta-d"></div><p class="pp-cta-hook">Not sure what this market means for <em>your</em> situation? Gaurang can walk you through it \u2014 no pressure, just straight answers.</p><div class="pp-cta-btn"><span>Book a free 15-min call today</span></div></div>';
+  h+='</div>';
+  h+='<div class="pp-col"><div class="pp-sec">Market Read \u00b7 '+cityName+'</div><div class="pp-reads">';
+  h+='<div class="pp-buy"><div class="pp-bl">If you\u2019re buying</div><p class="pp-bt">'+buyerPlain+'</p></div>';
+  h+='<div class="pp-sell"><div class="pp-bl">If you\u2019re selling</div><p class="pp-bt">'+sellerPlain+'</p></div>';
+  h+='</div></div>';
+  h+='</div>';
+  h+=ppFooter();
+  h+='</div>';
+
+  document.getElementById('printPage').innerHTML=h;
+  ppPrintWhenReady();
+}
+
+function ppFooter(){
+  var h='<div class="pp-ft"><div><div class="pp-ft-n">Gaurang Shah</div><div class="pp-ft-s">Real Estate Broker</div><div class="pp-ft-s">Royal LePage Flower City Realty</div><div class="pp-ft-p">(647) 892-2411</div></div>';
+  h+='<div class="pp-ft-dv"></div>';
+  h+='<div class="pp-ft-q"><img src="https://api.qrserver.com/v1/create-qr-code/?size=68x68&data=https%3A%2F%2Fdata.myshahteam.com&margin=1" alt="QR"/><div class="pp-ft-ql">Scan for live data</div></div>';
+  h+='<div class="pp-ft-dv"></div>';
+  h+='<div class="pp-ft-dc"><div>Prepared: '+new Date().toLocaleDateString('en-CA',{year:'numeric',month:'long'})+'</div><div>Source: TRREB Market Watch</div><div>Not intended to solicit buyers or</div><div>sellers currently under contract</div></div></div>';
+  return h;
+}
+
+function ppPrintWhenReady(){
+  var imgs=document.getElementById('printPage').querySelectorAll('img');
+  var n=imgs.length, done=0;
+  function go(){setTimeout(function(){window.print();},250);}
+  if(!n){go();return;}
+  imgs.forEach(function(i){
+    if(i.complete){done++;if(done>=n)go();}
+    else{i.onload=function(){done++;if(done>=n)go();};i.onerror=function(){done++;if(done>=n)go();};}
+  });
+}
+
+function ppCondPhrase(slots){
+  var conds=slots.map(function(s){return s.cond;});
+  var allSame=conds.every(function(c){return c===conds[0];});
+  if(allSame){
+    var word=conds[0]==="Buyer's mkt"?"buyer\u2019s markets":conds[0]==="Seller's mkt"?"seller\u2019s markets":"balanced markets";
+    return 'Both markets are currently '+word+'.';
+  }
+  return slots.map(function(s){
+    var w=s.cond==="Buyer's mkt"?"a buyer\u2019s market":s.cond==="Seller's mkt"?"a seller\u2019s market":"balanced";
+    return s.name+' is '+w;
+  }).join(', while ')+'.';
+}
+
+function buildAndPrintCompare(){
+  var active=cmpState.filter(function(s){return s.active;});
+  if(!active.length){alert('No markets selected for comparison.');return;}
+  var pk=function(v){return v!=null?(v>=1e6?'$'+(v/1e6).toFixed(2)+'M':'$'+Math.round(v/1000)+'K'):'n/a';};
+  var chgStr=function(now,old){if(now==null||old==null)return '';var d=(now/old-1)*100;return (d>=0?'\u2191 ':'\u2193 ')+Math.abs(d).toFixed(1)+'%';};
+  var chgCls=function(now,old,hi){if(now==null||old==null)return 'pp-mu';return ((now>=old)===hi)?'pp-up':'pp-dn';};
+
+  function latestFor(area,typeName){
+    var raw=MDATA[area]||[];if(!raw.length)return null;
+    var tp=TYPES.find(function(t){return t.k===typeName;})||TYPES[0];
+    var d=raw[raw.length-1], d12=raw.length>12?raw[raw.length-13]:null;
+    var price=tp.hpi?(d.hpi?d.hpi[tp.hpi]:null):d.avg;
+    var pricePrev=d12?(tp.hpi?(d12.hpi?d12.hpi[tp.hpi]:null):d12.avg):null;
+    return {ym:d.ym,price:price,pricePrev:pricePrev,sales:d.sales,salesPrev:d12?d12.sales:null,moi:d.moi,splp:d.splp,dom:d.dom,domPrev:d12?d12.dom:null};
+  }
+
+  var slots=active.map(function(s,i){
+    var L=latestFor(s.area,s.type);
+    var name=(AREA_LABELS_MAP[s.area]||s.area).replace(/ - .*/,'').replace(/\(.*$/,'').trim();
+    var moi=L?L.moi:null;
+    var cond=moi!=null?(moi<2.5?"Seller's mkt":moi>4?"Buyer's mkt":"Balanced"):"\u2014";
+    return {area:s.area,type:s.type,name:name,L:L,cond:cond,color:SLOT_COLORS[i]||'#6B7A90'};
+  });
+
+  var ymL=slots[0]&&slots[0].L&&slots[0].L.ym?ymLabel(slots[0].L.ym):'';
+
+  var didYouKnow='';
+  if(slots.length>=2&&slots[0].L&&slots[1].L&&slots[0].L.price&&slots[1].L.price){
+    var p0=slots[0].L.price,p1=slots[1].L.price;
+    var higher=p0>p1?slots[0]:slots[1],lower=p0>p1?slots[1]:slots[0];
+    var diff=Math.abs(p0-p1),prem=((diff/Math.min(p0,p1))*100).toFixed(0);
+    didYouKnow=higher.name+' '+higher.type+' costs <strong>'+pk(diff)+' more</strong> than '+lower.name+' '+lower.type+' \u2014 a '+prem+'% premium. '+ppCondPhrase(slots)+' Your dollar simply goes further in '+lower.name+' right now.';
+  } else {
+    didYouKnow='Comparing these markets side by side gives you a clearer picture of where your budget and timeline fit best. Small differences in inventory and days on market can make a big difference to your negotiating position.';
+  }
+
+  var buyerText='', sellerText='';
+  if(slots.length>=2){
+    var s0=slots[0],s1=slots[1];
+    var sp0=s0.L&&s0.L.splp!=null?s0.L.splp.toFixed(0)+'%':'n/a';
+    var sp1=s1.L&&s1.L.splp!=null?s1.L.splp.toFixed(0)+'%':'n/a';
+    var allBuyer=slots.every(function(s){return s.L&&s.L.moi!=null&&s.L.moi>4;});
+    var allSeller=slots.every(function(s){return s.L&&s.L.moi!=null&&s.L.moi<2.5;});
+    if(allBuyer){
+      buyerText='Both markets favour buyers right now. In '+s0.name+' you get more for your money, with homes selling at '+sp0+' of asking. '+s1.name+' gives even more negotiating room at '+sp1+' \u2014 but from a much higher price point. Take your time, include conditions in your offer, and get pre-approved before you start shopping.';
+    } else if(allSeller){
+      buyerText='Both '+s0.name+' and '+s1.name+' are seller\u2019s markets right now, so be prepared to move quickly. Have your mortgage pre-approval ready, and understand that conditions may be hard to include in a competitive offer. Work with your broker to craft the strongest offer possible.';
+    } else {
+      buyerText='These two markets are at different stages. '+slots.map(function(s){return s.name+' is a '+s.cond.replace(' mkt','\u2019s market').replace('Balanced','balanced market');}).join(', while ')+'. Adjust your strategy accordingly \u2014 more patient in buyer\u2019s markets, faster and cleaner offers in seller\u2019s markets. Either way, get pre-approved first.';
+    }
+    var d0=s0.L&&s0.L.dom!=null?Math.round(s0.L.dom):null;
+    var d1=s1.L&&s1.L.dom!=null?Math.round(s1.L.dom):null;
+    sellerText='In both cities, buyers have plenty of options \u2014 so accurate pricing is critical. '+s0.name+' homes average '+(d0?d0+' days':'some time')+' on market, '+s1.name+' '+(d1?d1:'\u2014')+'. The longer your home sits, the more leverage shifts to the buyer. Price it right from day one rather than testing the market.';
+  }
+
+  function cityCol(s,i){
+    var L=s.L; if(!L)return '<div class="pp-cty'+(i<slots.length-1?' pp-cty-l':'')+'"><p style="font-size:14px;color:#9CA3AF;padding:10px 0">No data available</p></div>';
+    var pc=chgStr(L.price,L.pricePrev), pcc=chgCls(L.price,L.pricePrev,true);
+    var sc=chgStr(L.sales,L.salesPrev), scc=chgCls(L.sales,L.salesPrev,true);
+    var moiLabel=L.moi!=null?(L.moi<2.5?"Seller's mkt":L.moi>4?"Buyer's mkt":"Balanced"):"\u2014";
+    var splpSub=L.splp!=null?(L.splp>=100?'at/above ask':((100-L.splp).toFixed(0)+'% below ask')):'';
+    var c='<div class="pp-cty'+(i<slots.length-1?' pp-cty-l':'')+'">';
+    c+='<div class="pp-cty-h"><div class="pp-dot" style="background:'+s.color+'"></div><span class="pp-cty-n">'+s.name+'</span><span class="pp-cty-ty">\u00b7 '+s.type+'</span></div>';
+    c+='<div class="pp-grid4">';
+    c+='<div class="pp-csc" style="border-top:3px solid '+s.color+'"><div class="pp-csc-l">Benchmark</div><div class="pp-csc-v">'+pk(L.price)+'</div><div class="pp-csc-c '+pcc+'">'+pc+'</div></div>';
+    c+='<div class="pp-csc"><div class="pp-csc-l">Sales</div><div class="pp-csc-v">'+(L.sales!=null?fmtN(L.sales):'n/a')+'</div><div class="pp-csc-c '+scc+'">'+sc+'</div></div>';
+    c+='<div class="pp-csc"><div class="pp-csc-l">Days on Mkt</div><div class="pp-csc-v">'+(L.dom!=null?Math.round(L.dom):'n/a')+'<span> days</span></div><div class="pp-csc-c pp-mu">'+(L.domPrev!=null?'was '+Math.round(L.domPrev):'')+'</div></div>';
+    c+='<div class="pp-csc"><div class="pp-csc-l">Months Inv.</div><div class="pp-csc-v">'+(L.moi!=null?L.moi.toFixed(1):'n/a')+'<span> mo.</span></div><div class="pp-csc-c pp-up">'+moiLabel+'</div></div>';
+    c+='</div>';
+    if(L.splp!=null){c+='<div class="pp-splp"><div class="pp-splp-l">Avg Sale / List</div><div class="pp-splp-v">'+L.splp.toFixed(1)+'% <span>\u00b7 '+splpSub+'</span></div></div>';}
+    c+='</div>';
+    return c;
+  }
+
+  var cols=slots.length;
+  var h='<div class="pp">';
+  h+='<div class="pp-chdr"><div class="pp-chdr-m">TRREB Market Watch 2026 \u00b7 GTA Market Comparison \u00b7 '+ymL+'</div><div class="pp-chdr-t">'+slots.map(function(s){return s.name+' '+s.type;}).join(' &nbsp;vs&nbsp; ')+'</div><div class="pp-chdr-s">MLS\u00ae HPI benchmark prices \u00b7 Figures rounded</div></div>';
+  h+='<div class="pp-tbar"></div>';
+  h+='<div class="pp-cities" style="grid-template-columns:repeat('+cols+',1fr)">';
+  slots.forEach(function(s,i){h+=cityCol(s,i);});
+  h+='</div>';
+  h+='<div class="pp-body">';
+  h+='<div class="pp-col pp-col-l"><div class="pp-sec">Market Insight</div>';
+  h+='<div class="pp-cta"><div class="pp-cta-h">Did you know?</div><p class="pp-ccta-t">'+didYouKnow+'</p><div class="pp-cta-d"></div><p class="pp-ccta-hook">Want to know which market fits your budget and timeline? Gaurang can break it all down for you \u2014 no pressure, just straight answers.</p><div class="pp-cta-btn"><span>Book a free 15-min call today</span></div></div>';
+  h+='</div>';
+  h+='<div class="pp-col"><div class="pp-sec">What this means for you</div><div class="pp-reads">';
+  h+='<div class="pp-buy"><div class="pp-bl">If you\u2019re buying</div><p class="pp-cbt" style="color:#1A2A3F">'+buyerText+'</p></div>';
+  h+='<div class="pp-sell"><div class="pp-bl">If you\u2019re selling</div><p class="pp-cbt" style="color:#3D2A14">'+sellerText+'</p></div>';
+  h+='</div></div>';
+  h+='</div>';
+  h+=ppFooter();
+  h+='</div>';
+
+  document.getElementById('printPage').innerHTML=h;
+  ppPrintWhenReady();
+}
+
 
 
 </script>
