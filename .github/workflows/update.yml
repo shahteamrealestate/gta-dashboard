@@ -1,0 +1,59 @@
+name: Update TRREB data
+
+on:
+  schedule:
+    # 9:00 AM Toronto during daylight time. Runs twice so a late TRREB release
+    # is picked up automatically if the PDF is not ready on the 10th.
+    - cron: "0 13 10 * *"
+    - cron: "0 13 12 * *"
+  workflow_dispatch:
+    inputs:
+      yymm:
+        description: "Optional target month in YYMM format, for example 2606"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: trreb-data-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install PDF parser
+        run: pip install pdfplumber requests
+
+      - name: Update dashboard data
+        env:
+          YYMM: ${{ github.event.inputs.yymm }}
+        run: |
+          if [ -n "$YYMM" ]; then
+            python update_dashboard.py index.html "$YYMM"
+          else
+            python update_dashboard.py index.html
+          fi
+
+      - name: Commit and publish if changed
+        run: |
+          git config user.name "trreb-updater"
+          git config user.email "actions@github.com"
+          rm -f index.html.bak
+          if ! git diff --quiet index.html; then
+            git add index.html
+            git commit -m "Market Watch update: $(date +'%B %Y')"
+            git push
+          else
+            echo "No new TRREB data to publish."
+          fi
