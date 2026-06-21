@@ -227,6 +227,7 @@ footer{font-size:12px;color:var(--muted);line-height:1.65;margin-top:20px}
 /* ============ COMPARE PANEL ============ */
 #comparePanel{display:none}
 #comparePanel.active{display:block}
+#chartBox,#cmpChartPanel,#cmpHealth,#ecoSection{scroll-margin-top:90px}
 #mainPanel.hidden{display:none}
 .cmp-selectors{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
 .cmp-slot{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
@@ -362,9 +363,10 @@ h1{color:#fff;font-family:var(--sans);font-weight:900;font-stretch:normal;letter
 .selector,.panel{background:#fff}
 .field label,.kpi .label,.pp-sc-l,.pp-csc-l{font-family:var(--sans);font-weight:900;color:#14375c}
 .field select,.cmp-slot select{border-radius:4px!important;background-color:#fff!important;color:#062b55!important;border-color:var(--line)!important;font-family:var(--sans);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='12'%3E%3Cpath d='M1 1.5l8 8 8-8' stroke='%23062b55' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")!important;background-repeat:no-repeat!important;background-position:right 14px center!important;background-size:18px 12px!important;padding-right:42px!important}
-.mode-toggle{display:grid;grid-template-columns:1fr 1fr 1fr;background:#fff;border:1px solid var(--line);border-radius:4px;padding:0;overflow:hidden;gap:0;box-shadow:0 4px 12px rgba(6,43,85,.07)}
-.mode-toggle button{min-height:58px;border-radius:0;background:#fff;color:var(--muted);align-items:flex-start;text-align:left;padding:12px 18px;border-right:1px solid var(--line)}
+.mode-toggle{display:grid;grid-template-columns:1fr 1fr 1fr;background:#fff;border:1px solid var(--line);border-radius:4px;padding:0;overflow:visible;gap:0;box-shadow:0 4px 12px rgba(6,43,85,.07);width:100%;box-sizing:border-box}
+.mode-toggle button{min-height:58px;border-radius:0;background:#fff;color:var(--muted);align-items:flex-start;text-align:left;padding:12px 14px;border-right:1px solid var(--line);min-width:0;overflow:hidden}
 .mode-toggle button:last-child{border-right:0}
+.mode-toggle .mode-main{white-space:normal;word-break:break-word;font-size:13px}
 .mode-toggle button[aria-pressed="true"]{background:#062b55;color:#fff}
 .mode-kicker{font-size:9px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#74c7ee;margin-bottom:2px}
 .mode-main{font-size:13px;font-weight:800;line-height:1.25}
@@ -418,6 +420,7 @@ h1{color:#fff;font-family:var(--sans);font-weight:900;font-stretch:normal;letter
 .lead-grid{margin-top:10px}.lead-wide{grid-column:1/-1}.lead-submit{width:100%;min-height:46px;background:#062b55;color:#fff;border:0;border-radius:4px;font-size:12px;font-weight:900;font-family:var(--sans);text-transform:uppercase;letter-spacing:.06em;cursor:pointer}
 .lead-submit:hover{background:#1B4F8A}
 @media(max-width:880px){.kpis{grid-template-columns:repeat(2,1fr)}.est-result-grid{grid-template-columns:1fr}.est-result-grid>div{border-right:0;border-bottom:1px solid var(--line);padding:9px 0}.est-result-grid>div:last-child{border-bottom:0}.est-grid,.lead-grid{grid-template-columns:1fr}}
+@media(max-width:640px){#plannerNudge{grid-template-columns:1fr!important}#plannerNudge button{justify-self:stretch!important;width:100%}}
 @media(max-width:560px){.mode-toggle{grid-template-columns:1fr}.mode-toggle button{border-right:0;border-bottom:1px solid var(--line)}.mode-toggle button:last-child{border-bottom:0}.kpis{grid-template-columns:1fr}#printBtn,.print-cta,#mapsLink{width:100%;justify-content:center!important}}
 @media(prefers-reduced-motion:reduce){#printBtn,.print-cta{animation:none!important}}
 
@@ -610,6 +613,16 @@ h1{color:#fff;font-family:var(--sans);font-weight:900;font-stretch:normal;letter
 @media(max-width:560px){html,body{width:100vw;max-width:100vw;overflow-x:hidden}body{padding:12px}.wrap,#mainPanel,#comparePanel,#plannerPanel{width:calc(100vw - 24px)!important;max-width:calc(100vw - 24px)!important;margin:0;overflow:hidden}.wrap>*,#mainPanel>*,#comparePanel>*,#plannerPanel>*{max-width:100%!important}.mobile-break{display:block}.simple-intro,.simple-hero{width:100%;max-width:100%;padding:14px}.simple-hero[style]{grid-template-columns:1fr!important}.simple-hero h2{font-size:21px}.simple-snapshot-grid,.simple-read-grid,.simple-metric-list,.planner-presets,.planner-result-grid,.planner-fields,.planner-lead-grid{grid-template-columns:1fr}.simple-estimator-gate{display:block}.simple-estimator-gate .gate-b{display:inline-block;margin-top:10px}.data-popup{right:12px;bottom:12px;width:calc(100vw - 24px)}.selector>div[style*="display:flex"]>*{flex:1 1 100%;max-width:100%}.controls{width:100%;align-items:stretch}.pills{width:100%;justify-content:center}.pills button{flex:1 1 auto;min-width:0;padding-left:8px;padding-right:8px}h1,.sub,.simple-intro h2,.simple-intro p,.simple-hero h2,.simple-hero p,.simple-stat-note,.market-narrative,.sel-note,.planner-hero h2,.planner-hero p{max-width:300px!important;overflow-wrap:break-word;word-break:break-word}.simple-action{max-width:100%;white-space:normal}.field select{max-width:100%}.cmp-table-panel{overflow:auto}.cmp-metric-table{min-width:620px}.compare-nudge{top:8px}.compare-nudge span{margin-right:0}}
 @media(prefers-reduced-motion:reduce){.mode-toggle button::after,.market-status-banner,.compare-nudge::before{animation:none!important}}
 
+/* Spark hover tooltip */
+.hc-sparkline{cursor:crosshair;position:relative}
+.hc-sparkline:hover .spark-hover-line{opacity:1}
+.spark-hover-line{opacity:0;transition:opacity .15s;pointer-events:none}
+.spark-hover-dot{opacity:0;transition:opacity .15s;pointer-events:none}
+.hc-sparkline:hover .spark-hover-dot{opacity:1}
+.spark-tip{position:absolute;background:#062B55;color:#fff;padding:5px 9px;border-radius:4px;font-size:11px;font-weight:700;pointer-events:none;white-space:nowrap;z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.18);opacity:0;transition:opacity .15s;transform:translate(-50%,-110%)}
+.spark-tip.show{opacity:1}
+.spark-tip::after{content:'';position:absolute;left:50%;top:100%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#062B55}
+.health-card{position:relative}
 </style>
 </head>
 <body>
@@ -643,14 +656,12 @@ h1{color:#fff;font-family:var(--sans);font-weight:900;font-stretch:normal;letter
   </button>
 </div>
 <!-- Hero nudge for planner -->
-<div id="plannerNudge" style="background:linear-gradient(135deg,#062b55,#1B4F8A);border-radius:8px;padding:18px 24px;margin-bottom:14px">
-  <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
-    <div>
-      <div style="color:#fff;font-size:16px;font-weight:700;margin-bottom:5px">Own a home anywhere in the GTA?</div>
-      <div style="color:rgba(255,255,255,.7);font-size:12.5px">Find out what it’s worth today — and what you could buy next. Takes 60 seconds, no sign-up needed.</div>
-    </div>
-    <button onclick="document.querySelector('[data-mode=planner]').click()" style="background:#74c7ee;color:#062b55;border:0;border-radius:6px;padding:11px 20px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;margin-left:auto;animation:plan-pulse 3s ease-in-out infinite">Plan my move</button>
+<div id="plannerNudge" style="background:linear-gradient(135deg,#062b55,#1B4F8A);border-radius:8px;padding:18px 24px;margin-bottom:14px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center">
+  <div style="min-width:0">
+    <div style="color:#fff;font-size:16px;font-weight:700;margin-bottom:5px">Own a home anywhere in the GTA?</div>
+    <div style="color:rgba(255,255,255,.7);font-size:12.5px">Find out what it's worth today — and what you could buy next. Takes 60 seconds, no sign-up needed.</div>
   </div>
+  <button onclick="document.querySelector('[data-mode=planner]').click()" style="background:#74c7ee;color:#062b55;border:0;border-radius:6px;padding:11px 20px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;justify-self:end;animation:plan-pulse 3s ease-in-out infinite">Plan my move</button>
 </div>
 <div id="mainPanel">
 <section class="selector">
@@ -700,6 +711,84 @@ h1{color:#fff;font-family:var(--sans);font-weight:900;font-stretch:normal;letter
 <div id="comparePanel"></div>
 
 <section id="plannerPanel" aria-label="Home Value and Move-Up Planner"></section>
+
+<section id="gtaFaq" style="margin-top:32px;border-top:2px solid #d7e9f5;padding-top:28px">
+  <h2 style="font-family:var(--display);font-size:22px;font-weight:800;color:#062b55;margin-bottom:6px">GTA Real Estate — Common Questions</h2>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:20px">Answers based on current TRREB Market Watch data. Updated monthly.</p>
+  <div style="display:grid;gap:12px">
+
+    <details style="background:#f5f9fd;border:1px solid #d7e9f5;border-radius:6px;padding:14px 16px">
+      <summary style="font-size:14px;font-weight:700;color:#062b55;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">What does Months of Inventory (MOI) mean — and is the GTA a buyer's or seller's market right now? <span style="color:#74c7ee;font-size:18px;line-height:1">+</span></summary>
+      <p style="font-size:13px;color:#3d4f5c;margin:10px 0 0;line-height:1.7">Months of Inventory (MOI) measures how long it would take to sell every active listing at the current pace of sales, assuming no new homes came to market. A balanced GTA market is typically 4–6 months. Below 4 months favours sellers; above 6 months favours buyers. As of May 2026, the GTA sits at approximately 4.1 months — balanced but improving for buyers. Use the dashboard above to see the current MOI for any specific city. <a href="https://myshahteam.com/trreb-market-watch-terms-explained-gta-buyers/" target="_blank" style="color:#0C447C;font-weight:600">Full explanation of TRREB terms →</a></p>
+    </details>
+
+    <details style="background:#f5f9fd;border:1px solid #d7e9f5;border-radius:6px;padding:14px 16px">
+      <summary style="font-size:14px;font-weight:700;color:#062b55;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">What does the sale-to-list price ratio (SP/LP) tell me about negotiating power? <span style="color:#74c7ee;font-size:18px;line-height:1">+</span></summary>
+      <p style="font-size:13px;color:#3d4f5c;margin:10px 0 0;line-height:1.7">The sale-to-list price ratio shows what percentage of asking price homes are actually selling for. A ratio of 100% means homes sell exactly at asking. Above 100% means competitive multiple offers. In May 2026, the GTA average was approximately 98% — meaning buyers are regularly negotiating 2% below asking. In Brampton and Mississauga specifically, that often means $15,000–$25,000 below list on a typical detached home. <a href="https://myshahteam.com/gta-housing-market-april-2026/" target="_blank" style="color:#0C447C;font-weight:600">Current GTA market conditions →</a></p>
+    </details>
+
+    <details style="background:#f5f9fd;border:1px solid #d7e9f5;border-radius:6px;padding:14px 16px">
+      <summary style="font-size:14px;font-weight:700;color:#062b55;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">How many days on market is normal in Brampton and Mississauga right now? <span style="color:#74c7ee;font-size:18px;line-height:1">+</span></summary>
+      <p style="font-size:13px;color:#3d4f5c;margin:10px 0 0;line-height:1.7">In May 2026, the GTA average was 42 days on market. Well-priced detached homes in Brampton and Mississauga are typically moving in 25–35 days. Condos are taking longer — often 45–60 days. If a listing has been sitting for 30+ days, buyers have meaningful room to negotiate. <a href="https://myshahteam.com/gta-housing-market-april-2026/" target="_blank" style="color:#0C447C;font-weight:600">Read the latest GTA market update →</a></p>
+    </details>
+
+    <details style="background:#f5f9fd;border:1px solid #d7e9f5;border-radius:6px;padding:14px 16px">
+      <summary style="font-size:14px;font-weight:700;color:#062b55;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">Will GTA home prices drop further in 2026? <span style="color:#74c7ee;font-size:18px;line-height:1">+</span></summary>
+      <p style="font-size:13px;color:#3d4f5c;margin:10px 0 0;line-height:1.7">Most major forecasters expect the GTA to post modest low-to-mid single-digit price gains in 2026, with detached homes leading and condos lagging. As of May 2026, average prices remain about 4–7% below May 2025 depending on property type. The Bank of Canada held rates at 2.25% in April 2026, which supports gradual recovery. Over 100,000 sidelined buyers represent pent-up demand that could accelerate a rebound. <a href="https://myshahteam.com/soft-market-first-time-buyers-gta/" target="_blank" style="color:#0C447C;font-weight:600">Is this a good window for first-time buyers? →</a></p>
+    </details>
+
+    <details style="background:#f5f9fd;border:1px solid #d7e9f5;border-radius:6px;padding:14px 16px">
+      <summary style="font-size:14px;font-weight:700;color:#062b55;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">What's the difference between average price and benchmark price in TRREB data? <span style="color:#74c7ee;font-size:18px;line-height:1">+</span></summary>
+      <p style="font-size:13px;color:#3d4f5c;margin:10px 0 0;line-height:1.7">Average price is simply the total dollar volume divided by the number of sales. It can be skewed by a few very expensive or very cheap transactions. The MLS® HPI benchmark price is a quality-adjusted measure that tracks a "typical" home over time. It's a better indicator of real price trends. This dashboard uses the HPI benchmark for price charts.</p>
+    </details>
+
+    <details style="background:#f5f9fd;border:1px solid #d7e9f5;border-radius:6px;padding:14px 16px">
+      <summary style="font-size:14px;font-weight:700;color:#062b55;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">How much household income do I need to buy a home in Brampton or Mississauga? <span style="color:#74c7ee;font-size:18px;line-height:1">+</span></summary>
+      <p style="font-size:13px;color:#3d4f5c;margin:10px 0 0;line-height:1.7">At May 2026 prices and current stress-test rates (roughly 7.25%), qualifying for a $900,000 home in Brampton with 20% down typically requires a combined household income of approximately $175,000–$195,000. For a $700,000 Brampton townhouse, the threshold drops to around $135,000–$150,000. These are estimates — lender, credit score, existing debts, and property type all affect your number. <a href="https://myshahteam.com/pre-approval-vs-budget-gta-first-time-buyers/" target="_blank" style="color:#0C447C;font-weight:600">Pre-approval vs your real budget →</a></p>
+    </details>
+
+    <details style="background:#f5f9fd;border:1px solid #d7e9f5;border-radius:6px;padding:14px 16px">
+      <summary style="font-size:14px;font-weight:700;color:#062b55;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">Should I buy a condo or a freehold home in the GTA in 2026? <span style="color:#74c7ee;font-size:18px;line-height:1">+</span></summary>
+      <p style="font-size:13px;color:#3d4f5c;margin:10px 0 0;line-height:1.7">Freeholds (detached, semi, townhouse) are recovering faster — sales are up and inventory is tightening. Condos are still in buyer's market territory, with 5–7 months of inventory in most GTA cities and prices down 5–9% year-over-year. If you're an end-user planning to stay 5+ years, today's condo pricing offers real value. <a href="https://myshahteam.com/condo-maintenance-fees-gta-first-time-buyers/" target="_blank" style="color:#0C447C;font-weight:600">What to know about condo fees before you buy →</a></p>
+    </details>
+
+    <details style="background:#f5f9fd;border:1px solid #d7e9f5;border-radius:6px;padding:14px 16px">
+      <summary style="font-size:14px;font-weight:700;color:#062b55;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">How do Bank of Canada rate changes affect home prices in Brampton and Mississauga? <span style="color:#74c7ee;font-size:18px;line-height:1">+</span></summary>
+      <p style="font-size:13px;color:#3d4f5c;margin:10px 0 0;line-height:1.7">Rate cuts reduce monthly carrying costs, which expands the pool of qualified buyers and gradually pushes prices up. Each 0.25% cut adds roughly $15,000–$25,000 in purchasing power for a typical GTA buyer. The Economic Context section above tracks the current overnight rate, prime rate, and inflation. <a href="https://myshahteam.com/economic-indicators-gta-home-buyers-explained/" target="_blank" style="color:#0C447C;font-weight:600">How economic indicators affect your purchase →</a></p>
+    </details>
+
+    <details style="background:#f5f9fd;border:1px solid #d7e9f5;border-radius:6px;padding:14px 16px">
+      <summary style="font-size:14px;font-weight:700;color:#062b55;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">What closing costs should I budget for as a first-time buyer in Ontario? <span style="color:#74c7ee;font-size:18px;line-height:1">+</span></summary>
+      <p style="font-size:13px;color:#3d4f5c;margin:10px 0 0;line-height:1.7">Beyond your down payment, first-time buyers in Ontario typically need 1.5–4% of the purchase price in closing costs. For a $900,000 Brampton home, budget $13,500–$36,000 extra. The biggest items are Ontario Land Transfer Tax (first-time buyers get a rebate up to $4,000), legal fees, title insurance, and home inspection. Toronto buyers pay a second municipal LTT on top of Ontario's. <a href="https://myshahteam.com/first-time-home-buyer-closing-costs-ontario/" target="_blank" style="color:#0C447C;font-weight:600">Full closing cost breakdown →</a></p>
+    </details>
+
+    <details style="background:#f5f9fd;border:1px solid #d7e9f5;border-radius:6px;padding:14px 16px">
+      <summary style="font-size:14px;font-weight:700;color:#062b55;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">How do I know if a home is priced fairly in today's GTA market? <span style="color:#74c7ee;font-size:18px;line-height:1">+</span></summary>
+      <p style="font-size:13px;color:#3d4f5c;margin:10px 0 0;line-height:1.7">Check three things: (1) the HPI benchmark price for that city and property type in this dashboard, (2) recent sold prices for comparable homes in the same neighbourhood over the last 60–90 days (your agent can pull these from the MLS), and (3) how many days the listing has been on market — anything over 21 days has negotiation potential. The SP/LP ratio for that city tells you the average discount buyers are currently getting. <a href="https://myshahteam.com/sell-my-house-brampton-2026/" target="_blank" style="color:#0C447C;font-weight:600">How to read today's pricing in your area →</a></p>
+    </details>
+
+  </div>
+  <p style="font-size:11px;color:var(--muted);margin-top:16px">Data sourced from <a href="https://trreb.ca" target="_blank" rel="noopener noreferrer" style="color:#0C447C;font-weight:600">TRREB Market Watch</a>. Not financial, investment or legal advice. For guidance on your specific situation, <a href="https://myshahteam.com/contact-us/" target="_blank" style="color:#0C447C;font-weight:600">contact Gaurang Shah</a>.</p>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"What does Months of Inventory mean and is the GTA a buyer's or seller's market right now?","acceptedAnswer":{"@type":"Answer","text":"Months of Inventory measures how long it would take to sell every active listing at the current pace of sales. A balanced GTA market is 4 to 6 months. Below 4 months favours sellers; above 6 months favours buyers. As of May 2026, the GTA sits at approximately 4.1 months — balanced but improving for buyers."}},
+    {"@type":"Question","name":"What does the sale-to-list price ratio tell me about negotiating power in the GTA?","acceptedAnswer":{"@type":"Answer","text":"The sale-to-list price ratio shows what percentage of asking price homes are actually selling for. In May 2026, the GTA average was approximately 98%, meaning buyers are regularly negotiating 2% below asking — often $15,000 to $25,000 below list on a typical Brampton or Mississauga detached home."}},
+    {"@type":"Question","name":"How many days on market is normal in Brampton and Mississauga?","acceptedAnswer":{"@type":"Answer","text":"In May 2026 the GTA average was 42 days on market. Well-priced detached homes in Brampton and Mississauga typically move in 25 to 35 days. Condos take longer, often 45 to 60 days. Listings sitting 30 plus days have meaningful negotiation room."}},
+    {"@type":"Question","name":"Will GTA home prices drop further in 2026?","acceptedAnswer":{"@type":"Answer","text":"Most forecasters expect modest low to mid single digit price gains in 2026, with detached homes leading and condos lagging. As of May 2026 average prices remain about 4 to 7% below May 2025. The Bank of Canada held rates at 2.25% in April 2026, supporting gradual recovery."}},
+    {"@type":"Question","name":"What is the difference between average price and benchmark price in GTA real estate data?","acceptedAnswer":{"@type":"Answer","text":"Average price divides total dollar volume by number of sales and can be skewed by outliers. The MLS HPI benchmark is a quality-adjusted measure tracking a typical home over time. It is a better indicator of real price trends and is what this dashboard uses for price charts."}},
+    {"@type":"Question","name":"How much household income do I need to buy a home in Brampton or Mississauga?","acceptedAnswer":{"@type":"Answer","text":"At May 2026 prices and current stress test rates, qualifying for a $900,000 home in Brampton with 20% down typically requires a combined household income of approximately $175,000 to $195,000. For a $700,000 townhouse the threshold drops to around $135,000 to $150,000."}},
+    {"@type":"Question","name":"Should I buy a condo or a freehold home in the GTA in 2026?","acceptedAnswer":{"@type":"Answer","text":"Freeholds are recovering faster with tightening inventory. Condos remain in buyer's market territory with 5 to 7 months of inventory and prices down 5 to 9% year over year. End users planning to stay 5 plus years can find real condo value today. Investors need to carefully check cash flow math."}},
+    {"@type":"Question","name":"How do Bank of Canada rate changes affect home prices in Brampton and Mississauga?","acceptedAnswer":{"@type":"Answer","text":"Rate cuts reduce monthly carrying costs and expand the buyer pool, gradually pushing prices up. Each 0.25% cut adds roughly $15,000 to $25,000 in purchasing power for a typical GTA buyer. The Bank of Canada held its overnight rate at 2.25% in April 2026."}},
+    {"@type":"Question","name":"What closing costs should I budget for as a first time buyer in Ontario?","acceptedAnswer":{"@type":"Answer","text":"First time buyers in Ontario typically need 1.5 to 4% of the purchase price in closing costs beyond the down payment. For a $900,000 Brampton home, budget $13,500 to $36,000 extra. The biggest items are Ontario Land Transfer Tax, legal fees, title insurance, and home inspection."}},
+    {"@type":"Question","name":"How do I know if a home is priced fairly in today's GTA market?","acceptedAnswer":{"@type":"Answer","text":"Check the HPI benchmark price for that city and property type, recent sold comparables from the last 60 to 90 days, and how many days the listing has been on market. Anything over 21 days has negotiation potential. The SP/LP ratio shows the average discount buyers are currently getting."}}
+  ]
+}
+</script>
 
 <footer>
   Sources: <a href="https://trreb.ca" target="_blank" rel="noopener noreferrer" style="color:#0C447C;font-weight:600;text-decoration:underline;text-underline-offset:2px">Toronto Regional Real Estate Board</a>, <i>Market Watch</i>  -  December editions 2016-2025 (full-year summaries and MLS® HPI tables) and all monthly editions June 2023 - May 2026 (monthly summaries, "Mos. Inv. (Trend)", and MLS® HPI tables); 2026 annual figures cover January-May and are compared with the same period of 2025. Figures as originally published; TRREB has since revised some historic totals after new PropTx boards joined, so small differences from TRREB's current site are expected. Monthly figures are not seasonally adjusted. Property-type prices use the MLS® HPI benchmark, TRREB's quality-adjusted price measure. Educational tool  -  not financial, investment or legal advice. Prepared June 2026. Barrie data: TRREB Community Reports (Simcoe-Barrie), available from 2019. Monthly figures interpolated from quarterly reports. HPI benchmark not published for this area. Hamilton data: Cornerstone Association of REALTORS® MLS® System (Hamilton Region), formerly RAHB. Pre-2023 figures estimated from RAHB regional data.
@@ -1121,7 +1210,7 @@ function buildCmpSelects(){
   var mapsUrl='https://www.google.com/maps/dir/'+aa.map(function(c){return encodeURIComponent(c+', Ontario');}).join('/');
   md.innerHTML='<a href="'+mapsUrl+'" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--price);border:1px solid #B5D4F4;border-radius:10px;padding:6px 13px;background:#EAF1FB;text-decoration:none;font-weight:600">&#128205; View selected areas on Google Maps</a><button onclick="buildAndPrint()" title="Print or save as PDF" aria-label="Print market report" style="display:inline-flex;align-items:center;justify-content:center;color:#4A5E72;border:1px solid #C8D4DF;border-radius:8px;padding:6px 8px;background:#F0F4F8;cursor:pointer;animation:print-glint 5s ease-in-out infinite"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></button>';
   cp.appendChild(md);
-  ['cmpChartPanel','cmpKpis','cmpVerdict','cmpHealth','cmpProfiles'].forEach(function(id){const d=document.createElement('section');if(id==='cmpChartPanel')d.className='cmp-chart-panel';else if(id==='cmpVerdict')d.className='cmp-verdict';d.id=id;cp.appendChild(d);});
+  ['cmpChartPanel','cmpKpis','cmpVerdict','cmpHealth','cmpEco','cmpProfiles'].forEach(function(id){const d=document.createElement('section');if(id==='cmpChartPanel')d.className='cmp-chart-panel';else if(id==='cmpVerdict')d.className='cmp-verdict';d.id=id;cp.appendChild(d);});
 }
 
 /* ---- draw compare chart ---- */
@@ -1295,6 +1384,7 @@ function renderCompare(){
 document.getElementById('modeToggle').addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
   const mode=b.dataset.mode;
+  if(mode==='planner')return; // planner handled by dedicated handler later
   [...e.currentTarget.children].forEach(x=>x.setAttribute('aria-pressed',x===b));
   const main=document.getElementById('mainPanel');
   const cmp=document.getElementById('comparePanel');
@@ -1319,14 +1409,17 @@ const CITY_PROFILES={"Brampton": {"tag": "Best for first-time buyers, families, 
 function calcHealthSignals(area){
   var ms=MDATA[area]||[];if(ms.length<4)return null;
   var recent=ms.slice(-12);var signals=[];
+  var ymLabels=recent.map(function(d){return d.ym||'';});
   var sdr=recent.map(function(d){return d.sales&&d.newList?d.newList/d.sales:null;}).filter(Boolean);
+  var sdrLabels=recent.map(function(d){return d.sales&&d.newList?(d.ym||''):null;}).filter(Boolean);
   if(sdr.length){var v=sdr[sdr.length-1];
     var lbl=v<1.5?"More buyers than homes":v<3?"Supply and demand balanced":"More homes than buyers";
     var dot=v<1.5?"green":v<3?"amber":"red";
     var buyer=v<1.5?"Competition is high. Have financing confirmed.":v<3?"Reasonable selection available.":"You have real choice and negotiating power.";
     var seller=v<1.5?"Good time to list.":v<3?"Price well and your home should move.":"Price accurately from day one. Overpriced homes sit.";
-    signals.push({title:"Supply vs demand",spark:sdr,val:v.toFixed(1)+" listings per sale",label:lbl,dot:dot,buyer:buyer,seller:seller});}
+    signals.push({title:"Supply vs demand",spark:sdr,sparkLabels:sdrLabels,val:v.toFixed(1)+" listings per sale",label:lbl,dot:dot,buyer:buyer,seller:seller,sparkUnit:" listings/sale"});}
   var prices=recent.map(function(d){return d.price||null;}).filter(Boolean);
+  var pricesLabels=recent.map(function(d){return d.price?(d.ym||''):null;}).filter(Boolean);
   if(prices.length>=6){
     var avg3=function(a){return a.reduce(function(x,y){return x+y;},0)/a.length;};
     var r3=avg3(prices.slice(-3));var p3=avg3(prices.slice(-6,-3));var chg=(r3/p3-1)*100;
@@ -1334,28 +1427,31 @@ function calcHealthSignals(area){
     var dot=chg>1.5?"amber":"green";
     var buyer=chg>1.5?"Prices rising. Waiting may cost more.":chg<-1.5?"Prices softening. Buying now locks in current pricing.":"Low risk of buying at a peak.";
     var seller=chg>1.5?"Good momentum. Strong time to list.":chg<-1.5?"Price carefully. Market moving against sellers.":"Stable. Price at current comparables.";
-    signals.push({title:"Price momentum (3-mo)",spark:prices,val:(chg>=0?"+":"")+chg.toFixed(1)+"% 3-mo trend",label:lbl,dot:dot,buyer:buyer,seller:seller});}
+    signals.push({title:"Price momentum (3-mo)",spark:prices,sparkLabels:pricesLabels,val:(chg>=0?"+":"")+chg.toFixed(1)+"% 3-mo trend",label:lbl,dot:dot,buyer:buyer,seller:seller,sparkUnit:""});}
   var abs=recent.map(function(d){return d.sales&&d.newList?d.sales/d.newList:null;}).filter(Boolean);
+  var absLabels=recent.map(function(d){return d.sales&&d.newList?(d.ym||''):null;}).filter(Boolean);
   if(abs.length){var v=abs[abs.length-1];
     var lbl=v>0.6?"Homes selling quickly":v>0.35?"About half of listings selling":"Most listings are sitting";
     var dot=v>0.6?"green":v>0.35?"amber":"red";
     var buyer=v>0.6?"Most listings sell. Act fast on a home you like.":v>0.35?"Good selection. Take time to compare.":"Plenty of choice. Negotiate confidently.";
     var seller=v>0.6?"Buyers active. Well-priced homes move.":v>0.35?"Presentation and pricing matter.":"Your home must stand out on price and condition.";
-    signals.push({title:"Listing absorption",spark:abs,val:Math.round(v*100)+"% of new listings sold",label:lbl,dot:dot,buyer:buyer,seller:seller});}
+    signals.push({title:"Listing absorption",spark:abs,sparkLabels:absLabels,val:Math.round(v*100)+"% of new listings sold",label:lbl,dot:dot,buyer:buyer,seller:seller,sparkUnit:""});}
   var splp=recent.map(function(d){return d.splp||null;}).filter(Boolean);
+  var splpLabels=recent.map(function(d){return d.splp?(d.ym||''):null;}).filter(Boolean);
   if(splp.length>=4){var last=splp[splp.length-1];var prev=splp.slice(-4,-1).reduce(function(a,b){return a+b;},0)/3;var dir=last-prev;
     var lbl=dir>0.5?"Sellers gaining leverage":dir<-0.5?"Sellers accepting less than asking":"Selling near asking price";
     var dot=dir>0.5?"amber":"green";
     var buyer=dir>0.5?"Price offers carefully.":dir<-0.5?"Room to negotiate below list. Use it.":"Fair market. Offers around list are typical.";
     var seller=dir>0.5?"Your negotiating position is improving.":dir<-0.5?"Expect offers below asking. Price with room.":"Stable. Price accurately.";
-    signals.push({title:"Sale-to-list trend",spark:splp,val:last.toFixed(0)+"% SP/LP (6-mo: "+(dir>=0?"+":"")+dir.toFixed(1)+"%)",label:lbl,dot:dot,buyer:buyer,seller:seller});}
+    signals.push({title:"Sale-to-list trend",spark:splp,sparkLabels:splpLabels,val:last.toFixed(0)+"% SP/LP (6-mo: "+(dir>=0?"+":"")+dir.toFixed(1)+"%)",label:lbl,dot:dot,buyer:buyer,seller:seller,sparkUnit:"%"});}
   var doms=recent.map(function(d){return d.dom||null;}).filter(Boolean);
+  var domsLabels=recent.map(function(d){return d.dom?(d.ym||''):null;}).filter(Boolean);
   if(doms.length>=4){var last=doms[doms.length-1];var prev3=doms.slice(-4,-1).reduce(function(a,b){return a+b;},0)/3;var dir=last-prev3;
     var lbl=dir>2?"Homes taking longer to sell":dir<-2?"Homes selling faster":"Days on market steady";
     var dot=dir>2?"red":dir<-2?"amber":"green";
     var buyer=dir>2?"More time to decide. Market cooling.":dir<-2?"Good homes move quickly. Be ready.":"Stable pace. Act on a home you love.";
     var seller=dir>2?"Buyers taking their time. Price aggressively.":dir<-2?"Tightening market. Good time to list.":"Consistent demand. Fair pricing will sell.";
-    signals.push({title:"Days on market trend",spark:doms,val:Math.round(last)+"d (vs 3mo ago: "+(dir>=0?"+":"")+dir.toFixed(0)+"d)",label:lbl,dot:dot,buyer:buyer,seller:seller});}
+    signals.push({title:"Days on market trend",spark:doms,sparkLabels:domsLabels,val:Math.round(last)+" days (vs 3 mo ago: "+(dir>=0?"+":"")+Math.round(dir)+" days)",label:lbl,dot:dot,buyer:buyer,seller:seller,sparkUnit:"d"});}
   return signals;
 }
 
@@ -1386,7 +1482,9 @@ function renderHealthIndicators(containerId,area){
         if(!started){fx=px;}lx=px;started=true;
       });
       area+='L'+lx.toFixed(1)+' 30 L'+fx.toFixed(1)+' 30 Z';
-      return '<svg class="hc-sparkline" viewBox="0 0 100 30" preserveAspectRatio="none">'
+      var valsAttr=sig.spark.map(function(v){return v==null?'':v;}).join('|');
+      var lblAttr=(sig.sparkLabels||[]).join('|');
+      return '<svg class="hc-sparkline" viewBox="0 0 100 30" preserveAspectRatio="none" data-vals="'+valsAttr+'" data-labels="'+lblAttr+'" data-unit="'+(sig.sparkUnit||'')+'">'
         +'<path d="'+area+'" fill="'+col+'" fill-opacity="0.10"/>'
         +'<path d="'+line+'" fill="none" stroke="'+col+'" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>'
         +'</svg>';})();
@@ -1452,6 +1550,9 @@ renderCompare=function(){
   renderCmpVerdict(as);
   var hEl=document.getElementById("cmpHealth");
   if(hEl&&as.length>0)renderConsolidatedHealthCharts(as,hEl);
+  // Economic Context (national/regional - same for all cities)
+  var ecEl=document.getElementById("cmpEco");
+  if(ecEl){renderEconomicIndicators("cmpEco","monthly");}
   // City profiles go after the compare table for natural reading order
   // renderCmpProfiles is called after renderCompareMetricTable in the main flow
   renderCmpProfiles(as);
@@ -1484,7 +1585,8 @@ function renderConsolidatedHealthCharts(as,el){
     }
     as.forEach(function(sr,si){
       var line='',area='',started=false,firstX=null,lastX=null;
-      sr.data.forEach(function(d,i){var v=d[cfg.key];if(v==null)return;var px=cx(i),py=cy(v);
+      var lineVals=[],lineLabels=[];
+      sr.data.forEach(function(d,i){var v=d[cfg.key];lineVals.push(v==null?'':v);lineLabels.push(d.ym||'');if(v==null)return;var px=cx(i),py=cy(v);
         line+=(started?'L':'M')+' '+px+' '+py+' ';area+=(started?'L':'M')+' '+px+' '+py+' ';
         if(!started)firstX=px;lastX=px;started=true;});
       if(!started)return;
@@ -1492,14 +1594,14 @@ function renderConsolidatedHealthCharts(as,el){
       var gid='hg'+si+cfg.key;
       s+='<defs><linearGradient id="'+gid+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+sr.color+'" stop-opacity=".13"/><stop offset="1" stop-color="'+sr.color+'" stop-opacity="0"/></linearGradient></defs>';
       s+='<path d="'+area+'" fill="url(#'+gid+')"/>';
-      s+='<path d="'+line+'" fill="none" stroke="'+sr.color+'" stroke-width="2.2" stroke-linejoin="round"/>';
+      s+='<path class="cmphc-line" data-city="'+sr.label.replace(/"/g,'&quot;')+'" data-color="'+sr.color+'" data-vals="'+lineVals.join('|')+'" data-labels="'+lineLabels.join('|')+'" data-unit="'+(cfg.unit||'')+'" data-fmt="'+(cfg.fmtKey||'')+'" d="'+line+'" fill="none" stroke="'+sr.color+'" stroke-width="2.2" stroke-linejoin="round"/>';
     });
     var vStr=as.map(function(sr){var last=[].concat(sr.data).reverse().find(function(d){return d[cfg.key]!=null;});
       return '<span style="font-size:11.5px"><span style="display:inline-block;width:8px;height:3px;border-radius:1px;background:'+sr.color+';margin-right:3px;vertical-align:middle"></span>'+sr.label+' <b>'+( last?cfg.fmt(last[cfg.key]):'n/a')+'</b></span>';}).join('<span style="color:#ccc;margin:0 5px">·</span>');
     return '<div style="background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow:hidden">'
       +'<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:6px">'+cfg.label+'</div>'
       +'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">'+vStr+'</div>'
-      +'<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" style="display:block;width:100%;height:130px">'+s+'</svg>'
+      +'<svg class="cmphc-chart" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" style="display:block;width:100%;height:130px;cursor:crosshair">'+s+'</svg>'
       +'<div style="font-size:11px;color:var(--muted);line-height:1.55;border-top:1px solid var(--line);padding-top:8px;margin-top:8px">'
       +'<b style="color:var(--ink)">Buyers:</b> '+cfg.buyer+'&ensp;<b style="color:var(--ink)">Sellers:</b> '+cfg.seller+'</div>'
       +'</div>';
@@ -1508,16 +1610,16 @@ function renderConsolidatedHealthCharts(as,el){
   var moiLast=as.map(function(s){var last=[].concat(s.data).reverse().find(function(d){return d.moi!=null;});return last?last.moi:null;});
   var allBuyer=moiLast.every(function(v){return v!=null&&v>=3.8;});
   var cfgs=[
-    {key:'moi',label:'Supply vs demand — months of inventory',fmt:function(v){return v.toFixed(1)+' mo';},ref:3.8,refLabel:'balanced (3.8)',
+    {key:'moi',unit:' mo',fmtKey:'moi',label:'Supply vs demand — months of inventory',fmt:function(v){return v.toFixed(1)+' mo';},ref:3.8,refLabel:'balanced (3.8)',
      buyer:allBuyer?'All markets above 3.8 mo — buyers have choice, time to negotiate, and room to add conditions.':'Markets vary. Check which city is in buyer vs seller territory before your offer.',
      seller:'Price from recent comparables. Accurate pricing is critical — overpriced listings sit.'},
-    {key:'splp',label:'Sale-to-list trend — negotiating room',fmt:function(v){return v.toFixed(1)+'%';},ref:100,refLabel:'asking (100%)',
+    {key:'splp',unit:'%',fmtKey:'splp',label:'Sale-to-list trend — negotiating room',fmt:function(v){return v.toFixed(1)+'%';},ref:100,refLabel:'asking (100%)',
      buyer:'Below 100% means buyers are negotiating. The wider the gap from asking, the more room.',
      seller:'Price at or close to market value. A well-staged home closer to 100% sells faster.'},
-    {key:'dom',label:'Days on market — how fast homes sell',fmt:function(v){return Math.round(v)+' d';},
+    {key:'dom',unit:' d',fmtKey:'dom',label:'Days on market — how fast homes sell',fmt:function(v){return Math.round(v)+' days';},
      buyer:'More days on market means more time to arrange financing, inspections, and comparables.',
      seller:'Homes priced right and well-presented sell faster. Stale listings tend to sell for less.'},
-    {key:'sales',label:'Sales volume — listing absorption',fmt:function(v){return (v>=1000?(v/1000).toFixed(1)+'K':Math.round(v).toString());},
+    {key:'sales',unit:'',fmtKey:'sales',label:'Sales volume — listing absorption',fmt:function(v){return (v>=1000?(v/1000).toFixed(1)+'K':Math.round(v).toString());},
      buyer:'Higher volume means more recent comparables to negotiate from — good for research.',
      seller:'Strong absorption signals demand. Price well and present strongly at launch.'}
   ];
@@ -1547,7 +1649,7 @@ renderAnalysis=function(){
 const ECO_DATA={"gdp_yoy":{"2016-01":1.2,"2016-04":1.5,"2016-07":2.0,"2016-10":2.1,"2017-01":2.2,"2017-04":3.5,"2017-07":3.3,"2017-10":2.9,"2018-01":2.4,"2018-04":2.5,"2018-07":2.1,"2018-10":1.5,"2019-01":1.6,"2019-04":1.5,"2019-07":1.9,"2019-10":1.8,"2020-01":-0.4,"2020-04":-13.3,"2020-07":-5.3,"2020-10":-3.1,"2021-01":0.3,"2021-04":11.0,"2021-07":5.4,"2021-10":4.2,"2022-01":3.9,"2022-04":4.1,"2022-07":3.8,"2022-10":2.1,"2023-01":1.7,"2023-04":1.2,"2023-07":0.8,"2023-10":0.7,"2024-01":1.2,"2024-04":1.7,"2024-07":2.1,"2024-10":3.1,"2025-01":3.1,"2025-04":2.0,"2025-07":1.7,"2025-10":0.7,"2026-01":-0.1},"tor_emp_yoy":{"2017-01":1.1,"2017-06":2.3,"2017-12":2.8,"2018-01":2.5,"2018-06":1.8,"2018-12":1.5,"2019-01":2.1,"2019-06":2.5,"2019-12":2.9,"2020-03":-5.2,"2020-06":-12.1,"2020-09":-5.8,"2020-12":-4.1,"2021-03":-0.8,"2021-06":5.4,"2021-09":4.2,"2021-12":3.9,"2022-03":4.8,"2022-06":3.5,"2022-09":2.1,"2022-12":1.8,"2023-03":2.2,"2023-06":1.9,"2023-09":1.5,"2023-12":1.3,"2024-03":1.4,"2024-06":1.1,"2024-09":1.7,"2024-12":2.6,"2025-03":1.8,"2025-06":1.4,"2025-09":1.1,"2025-12":0.9,"2026-01":0.8,"2026-02":0.7,"2026-03":0.6},"tor_unemp":{"2016-01":6.8,"2016-02":6.5,"2016-03":6.3,"2016-04":6.4,"2016-05":6.2,"2016-06":6.4,"2016-07":6.3,"2016-08":6.2,"2016-09":5.9,"2016-10":6.0,"2016-11":5.9,"2016-12":5.8,"2017-01":5.7,"2017-02":5.6,"2017-03":5.4,"2017-04":5.5,"2017-05":5.3,"2017-06":5.4,"2017-07":5.5,"2017-08":5.3,"2017-09":5.0,"2017-10":4.9,"2017-11":4.8,"2017-12":4.9,"2018-01":5.0,"2018-02":4.9,"2018-03":5.1,"2018-04":5.0,"2018-05":5.2,"2018-06":5.1,"2018-07":5.3,"2018-08":5.1,"2018-09":5.0,"2018-10":5.2,"2018-11":5.1,"2018-12":5.3,"2019-01":5.5,"2019-02":5.3,"2019-03":5.4,"2019-04":5.2,"2019-05":5.0,"2019-06":5.1,"2019-07":5.3,"2019-08":5.2,"2019-09":5.1,"2019-10":5.0,"2019-11":5.2,"2019-12":5.1,"2020-01":5.3,"2020-02":5.1,"2020-03":7.8,"2020-04":13.9,"2020-05":15.2,"2020-06":13.1,"2020-07":10.8,"2020-08":9.7,"2020-09":9.2,"2020-10":8.9,"2020-11":9.1,"2020-12":9.0,"2021-01":9.4,"2021-02":9.2,"2021-03":8.9,"2021-04":9.7,"2021-05":9.3,"2021-06":8.4,"2021-07":7.8,"2021-08":7.2,"2021-09":6.7,"2021-10":6.2,"2021-11":5.9,"2021-12":5.6,"2022-01":5.4,"2022-02":5.2,"2022-03":5.0,"2022-04":4.9,"2022-05":4.7,"2022-06":4.9,"2022-07":5.1,"2022-08":5.0,"2022-09":5.2,"2022-10":5.3,"2022-11":5.5,"2022-12":5.7,"2023-01":5.9,"2023-02":6.0,"2023-03":6.1,"2023-04":6.2,"2023-05":6.1,"2023-06":6.3,"2023-07":6.5,"2023-08":6.7,"2023-09":6.9,"2023-10":7.0,"2023-11":7.1,"2023-12":7.2,"2024-01":7.3,"2024-02":7.2,"2024-03":7.5,"2024-04":7.6,"2024-05":7.7,"2024-06":7.6,"2024-07":7.7,"2024-08":8.0,"2024-09":8.0,"2024-10":8.0,"2024-11":8.1,"2024-12":8.4,"2025-01":8.5,"2025-02":8.6,"2025-03":8.7,"2025-04":8.4,"2025-05":8.3,"2025-06":8.2,"2025-07":8.1,"2025-08":8.0,"2025-09":7.9,"2025-10":8.0,"2025-11":8.1,"2025-12":8.2,"2026-01":8.3,"2026-02":8.2,"2026-03":8.1},"cpi_yoy":{"2017-01":2.13,"2017-02":2.05,"2017-03":1.56,"2017-04":1.64,"2017-05":1.32,"2017-06":1.01,"2017-07":1.16,"2017-08":1.4,"2017-09":1.55,"2017-10":1.39,"2017-11":2.1,"2017-12":1.87,"2018-01":1.7,"2018-02":2.16,"2018-03":2.31,"2018-04":2.22,"2018-05":2.22,"2018-06":2.45,"2018-07":2.99,"2018-08":2.84,"2018-09":2.22,"2018-10":2.44,"2018-11":1.68,"2018-12":1.99,"2019-01":1.44,"2019-02":1.51,"2019-03":1.88,"2019-04":2.03,"2019-05":2.4,"2019-06":2.02,"2019-07":2.01,"2019-08":1.94,"2019-09":1.87,"2019-10":1.86,"2019-11":2.17,"2019-12":2.25,"2020-01":2.4,"2020-02":2.16,"2020-03":0.89,"2020-04":-0.22,"2020-05":-0.37,"2020-06":0.66,"2020-07":0.15,"2020-08":0.15,"2020-09":0.51,"2020-10":0.66,"2020-11":0.95,"2020-12":0.73,"2021-01":1.02,"2021-02":1.09,"2021-03":2.2,"2021-04":3.39,"2021-05":3.6,"2021-06":3.06,"2021-07":3.72,"2021-08":4.09,"2021-09":4.38,"2021-10":4.65,"2021-11":4.72,"2021-12":4.8,"2022-01":5.14,"2022-02":5.69,"2022-03":6.66,"2022-04":6.77,"2022-05":7.73,"2022-06":8.13,"2022-07":7.59,"2022-08":7.01,"2022-09":6.86,"2022-10":6.88,"2022-11":6.8,"2022-12":6.32,"2023-01":5.92,"2023-02":5.25,"2023-03":4.3,"2023-04":4.41,"2023-05":3.36,"2023-06":2.81,"2023-07":3.27,"2023-08":4.0,"2023-09":3.8,"2023-10":3.12,"2023-11":3.12,"2023-12":3.4,"2024-01":2.86,"2024-02":2.78,"2024-03":2.9,"2024-04":2.69,"2024-05":2.87,"2024-06":2.67,"2024-07":2.53,"2024-08":1.95,"2024-09":1.64,"2024-10":2.02,"2024-11":1.89,"2024-12":1.83,"2025-01":1.9,"2025-02":2.64,"2025-03":2.32,"2025-04":1.74,"2025-05":1.73,"2025-06":1.86,"2025-07":1.73,"2025-08":1.85,"2025-09":2.36,"2025-10":2.16,"2025-11":2.22,"2025-12":2.36,"2026-01":2.29,"2026-02":1.78,"2026-03":2.39,"2026-04":2.82},"overnight":{"2016-01":0.5,"2016-02":0.5,"2016-03":0.5,"2016-04":0.5,"2016-05":0.5,"2016-06":0.5,"2016-07":0.5,"2016-08":0.5,"2016-09":0.5,"2016-10":0.5,"2016-11":0.5,"2016-12":0.5,"2017-01":0.5,"2017-02":0.5,"2017-03":0.5,"2017-04":0.5,"2017-05":0.5,"2017-06":0.5,"2017-07":0.67,"2017-08":0.75,"2017-09":0.96,"2017-10":1.0,"2017-11":1.0,"2017-12":1.0,"2018-01":1.12,"2018-02":1.25,"2018-03":1.25,"2018-04":1.25,"2018-05":1.25,"2018-06":1.25,"2018-07":1.42,"2018-08":1.5,"2018-09":1.5,"2018-10":1.57,"2018-11":1.75,"2018-12":1.75,"2019-01":1.75,"2019-02":1.75,"2019-03":1.75,"2019-04":1.75,"2019-05":1.75,"2019-06":1.75,"2019-07":1.75,"2019-08":1.75,"2019-09":1.75,"2019-10":1.75,"2019-11":1.75,"2019-12":1.75,"2020-01":1.75,"2020-02":1.75,"2020-03":0.95,"2020-04":0.25,"2020-05":0.25,"2020-06":0.25,"2020-07":0.25,"2020-08":0.25,"2020-09":0.25,"2020-10":0.25,"2020-11":0.25,"2020-12":0.25,"2021-01":0.25,"2021-02":0.25,"2021-03":0.25,"2021-04":0.25,"2021-05":0.25,"2021-06":0.25,"2021-07":0.25,"2021-08":0.25,"2021-09":0.25,"2021-10":0.25,"2021-11":0.25,"2021-12":0.25,"2022-01":0.25,"2022-02":0.25,"2022-03":0.48,"2022-04":0.79,"2022-05":1.0,"2022-06":1.48,"2022-07":2.07,"2022-08":2.5,"2022-09":3.07,"2022-10":3.32,"2022-11":3.75,"2022-12":4.13,"2023-01":4.3,"2023-02":4.5,"2023-03":4.5,"2023-04":4.5,"2023-05":4.5,"2023-06":4.69,"2023-07":4.9,"2023-08":5.0,"2023-09":5.0,"2023-10":5.0,"2023-11":5.0,"2023-12":5.0,"2024-01":5.0,"2024-02":5.0,"2024-03":5.0,"2024-04":5.0,"2024-05":5.0,"2024-06":4.79,"2024-07":4.7,"2024-08":4.5,"2024-09":4.29,"2024-10":4.12,"2024-11":3.75,"2024-12":3.43,"2025-01":3.23,"2025-02":3.0,"2025-03":2.85,"2025-04":2.75,"2025-05":2.75,"2025-06":2.75,"2025-07":2.75,"2025-08":2.75,"2025-09":2.65,"2025-10":2.48,"2025-11":2.25,"2025-12":2.25,"2026-01":2.25,"2026-02":2.25,"2026-03":2.25,"2026-04":2.25,"2026-05":2.25},"prime":{"2016-01":0.52,"2016-02":0.5,"2016-03":0.5,"2016-04":0.5,"2016-05":0.5,"2016-06":0.5,"2016-07":0.51,"2016-08":0.49,"2016-09":0.5,"2016-10":0.49,"2016-11":0.49,"2016-12":0.49,"2017-01":0.49,"2017-02":0.49,"2017-03":0.5,"2017-04":0.5,"2017-05":0.49,"2017-06":0.49,"2017-07":0.74,"2017-08":0.75,"2017-09":0.99,"2017-10":1.0,"2017-11":0.99,"2017-12":1.0,"2018-01":1.25,"2018-02":1.24,"2018-03":1.25,"2018-04":1.25,"2018-05":1.24,"2018-06":1.25,"2018-07":1.49,"2018-08":1.5,"2018-09":1.5,"2018-10":1.75,"2018-11":1.75,"2018-12":1.75,"2019-01":1.75,"2019-02":1.75,"2019-03":1.75,"2019-04":1.75,"2019-05":1.75,"2019-06":1.74,"2019-07":1.75,"2019-08":1.75,"2019-09":1.75,"2019-10":1.75,"2019-11":1.75,"2019-12":1.75,"2020-01":1.75,"2020-02":1.75,"2020-03":0.74,"2020-04":0.23,"2020-05":0.24,"2020-06":0.23,"2020-07":0.24,"2020-08":0.23,"2020-09":0.22,"2020-10":0.23,"2020-11":0.23,"2020-12":0.17,"2021-01":0.18,"2021-02":0.21,"2021-03":0.15,"2021-04":0.17,"2021-05":0.19,"2021-06":0.19,"2021-07":0.19,"2021-08":0.2,"2021-09":0.18,"2021-10":0.2,"2021-11":0.21,"2021-12":0.13,"2022-01":0.18,"2022-02":0.18,"2022-03":0.44,"2022-04":0.92,"2022-05":0.95,"2022-06":1.45,"2022-07":2.47,"2022-08":2.48,"2022-09":3.21,"2022-10":3.23,"2022-11":3.75,"2022-12":4.25,"2023-01":4.25,"2023-02":4.48,"2023-03":4.5,"2023-04":4.49,"2023-05":4.49,"2023-06":4.74,"2023-07":4.99,"2023-08":5.0,"2023-09":4.99,"2023-10":5.01,"2023-11":5.01,"2023-12":5.02,"2024-01":5.03,"2024-02":5.0,"2024-03":5.0,"2024-04":5.0,"2024-05":5.0,"2024-06":4.76,"2024-07":4.51,"2024-08":4.51,"2024-09":4.27,"2024-10":3.78,"2024-11":3.76,"2024-12":3.28,"2025-01":3.27,"2025-02":2.98,"2025-03":2.74,"2025-04":2.74,"2025-05":2.74,"2025-06":2.74,"2025-07":2.75,"2025-08":2.76,"2025-09":2.48,"2025-10":2.5,"2025-11":2.23,"2025-12":2.27,"2026-01":2.25,"2026-02":2.25,"2026-03":2.26,"2026-04":2.24,"2026-05":2.24},"mortgage5":{"2016-01":4.64,"2016-02":4.64,"2016-03":4.64,"2016-04":4.64,"2016-05":4.64,"2016-06":4.64,"2016-07":4.74,"2016-08":4.74,"2016-09":4.64,"2016-10":4.64,"2016-11":4.64,"2016-12":4.64,"2017-01":4.64,"2017-02":4.64,"2017-03":4.64,"2017-04":4.64,"2017-05":4.64,"2017-06":4.64,"2017-07":4.74,"2017-08":4.84,"2017-09":4.85,"2017-10":4.92,"2017-11":4.99,"2017-12":4.99,"2018-01":5.08,"2018-02":5.14,"2018-03":5.14,"2018-04":5.14,"2018-05":5.3,"2018-06":5.34,"2018-07":5.34,"2018-08":5.34,"2018-09":5.34,"2018-10":5.34,"2018-11":5.34,"2018-12":5.34,"2019-01":5.34,"2019-02":5.34,"2019-03":5.34,"2019-04":5.34,"2019-05":5.34,"2019-06":5.34,"2019-07":5.25,"2019-08":5.19,"2019-09":5.19,"2019-10":5.19,"2019-11":5.19,"2019-12":5.19,"2020-01":5.19,"2020-02":5.19,"2020-03":5.12,"2020-04":5.04,"2020-05":4.99,"2020-06":4.94,"2020-07":4.94,"2020-08":4.83,"2020-09":4.79,"2020-10":4.79,"2020-11":4.79,"2020-12":4.79,"2021-01":4.79,"2021-02":4.79,"2021-03":4.79,"2021-04":4.79,"2021-05":4.79,"2021-06":4.79,"2021-07":4.79,"2021-08":4.79,"2021-09":4.79,"2021-10":4.79,"2021-11":4.79,"2021-12":4.79,"2022-01":4.79,"2022-02":4.79,"2022-03":4.79,"2022-04":4.89,"2022-05":5.09,"2022-06":5.7,"2022-07":6.06,"2022-08":6.14,"2022-09":6.14,"2022-10":6.31,"2022-11":6.49,"2022-12":6.49,"2023-01":6.49,"2023-02":6.49,"2023-03":6.49,"2023-04":6.49,"2023-05":6.49,"2023-06":6.49,"2023-07":6.49,"2023-08":6.8,"2023-09":6.84,"2023-10":7.04,"2023-11":7.04,"2023-12":7.04,"2024-01":6.95,"2024-02":6.83,"2024-03":6.84,"2024-04":6.84,"2024-05":6.84,"2024-06":6.84,"2024-07":6.79,"2024-08":6.69,"2024-09":6.59,"2024-10":6.49,"2024-11":6.49,"2024-12":6.49,"2025-01":6.49,"2025-02":6.49,"2025-03":6.49,"2025-04":6.49,"2025-05":6.19,"2025-06":6.09,"2025-07":6.09,"2025-08":6.09,"2025-09":6.09,"2025-10":6.09,"2025-11":6.09,"2025-12":6.09,"2026-01":6.09,"2026-02":6.09,"2026-03":6.09,"2026-04":6.09,"2026-05":6.09}};
 function renderEconomicIndicators(containerId,view){
   var el=document.getElementById(containerId);if(!el)return;
-  function spark(vals,color){
+  function spark(vals,color,labels,unit){
     var v=vals.filter(function(x){return x!=null;});
     if(v.length<2)return '<svg class="hc-sparkline" viewBox="0 0 100 30" preserveAspectRatio="none"></svg>';
     var mx=Math.max.apply(null,v),mn=Math.min.apply(null,v),range=mx-mn||0.01;
@@ -1561,19 +1663,21 @@ function renderEconomicIndicators(containerId,view){
       if(!started){fx=px;}lx=px;started=true;
     });
     area+='L'+lx.toFixed(1)+' 30 L'+fx.toFixed(1)+' 30 Z';
-    return '<svg class="hc-sparkline" viewBox="0 0 100 30" preserveAspectRatio="none">'
+    var valsAttr=vals.map(function(v){return v==null?'':v;}).join('|');
+    var labelsAttr=(labels||[]).join('|');
+    return '<svg class="hc-sparkline" viewBox="0 0 100 30" preserveAspectRatio="none" data-vals="'+valsAttr+'" data-labels="'+labelsAttr+'" data-unit="'+(unit||'')+'">'
       +'<path d="'+area+'" fill="'+color+'" fill-opacity="0.10"/>'
       +'<path d="'+line+'" fill="none" stroke="'+color+'" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>'
       +'</svg>';
   }
-  function card(t,src,val,unit,chg,vals,color,b,s2){
+  function card(t,src,val,unit,chg,vals,color,b,s2,labels,sparkUnit){
     var srcLinked=src
       .replace('Statistics Canada','<a href="https://www.statcan.gc.ca" target="_blank" rel="noopener noreferrer" style="color:#0C447C;font-weight:600;text-decoration:underline;text-underline-offset:2px">Statistics Canada</a>')
       .replace('Bank of Canada','<a href="https://www.bankofcanada.ca" target="_blank" rel="noopener noreferrer" style="color:#0C447C;font-weight:600;text-decoration:underline;text-underline-offset:2px">Bank of Canada</a>');
     return '<div class="health-card"><div class="hc-label">'+t+'</div>'
       +'<div class="hc-status" style="font-size:15px;font-weight:700">'+(val!=null?val+unit:"n/a")
       +(chg?'<span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:8px">'+chg+'</span>':"")+'</div>'
-      +spark(vals,color)
+      +spark(vals,color,labels,sparkUnit||unit)
       +'<div class="hc-buyer"><b>For buyers:</b> '+b+'<br><b>For sellers:</b> '+s2+'</div>'
       +'<div class="hc-val">'+srcLinked+'</div></div>';
   }
@@ -1584,18 +1688,18 @@ function renderEconomicIndicators(containerId,view){
     +'<p style="font-size:12px;color:var(--muted);margin-bottom:12px">Key indicators affecting buyer borrowing power and housing demand. Sources: <a href="https://www.bankofcanada.ca" target="_blank" rel="noopener noreferrer" style="color:#0C447C;font-weight:600;text-decoration:underline;text-underline-offset:2px">Bank of Canada</a>, <a href="https://www.statcan.gc.ca" target="_blank" rel="noopener noreferrer" style="color:#0C447C;font-weight:600;text-decoration:underline;text-underline-offset:2px">Statistics Canada</a>.</p>'
     +'<div class="health-grid">';
   var g=ECO_DATA.gdp_yoy,gK=Object.keys(g).sort(),gL=lv(g);
-  out+=card("Canada real GDP growth","Statistics Canada - quarterly YoY %",gL!=null?gL.toFixed(1):"n/a","%","("+lk(g)+")",gK.map(function(k){return g[k];}),gL!=null&&gL>0?"#10B981":"#EF4444",gL!=null&&gL>1.5?"Growing economy means more confident buyers.":gL!=null&&gL>0?"Modest growth. Buyers cautious but active.":"Economy contracting. Buyers more hesitant.",gL!=null&&gL>1.5?"Strong economy supports home values.":"Soft GDP adds pricing pressure.");
+  out+=card("Canada real GDP growth","Statistics Canada - quarterly YoY %",gL!=null?gL.toFixed(1):"n/a","%","("+lk(g)+")",gK.map(function(k){return g[k];}),gL!=null&&gL>0?"#10B981":"#EF4444",gL!=null&&gL>1.5?"Growing economy means more confident buyers.":gL!=null&&gL>0?"Modest growth. Buyers cautious but active.":"Economy contracting. Buyers more hesitant.",gL!=null&&gL>1.5?"Strong economy supports home values.":"Soft GDP adds pricing pressure.",gK,"%");
   var e=ECO_DATA.tor_emp_yoy,eK=Object.keys(e).sort(),eL=lv(e);
-  out+=card("Toronto employment growth","Statistics Canada LFS - Toronto CMA YoY %",eL!=null?eL.toFixed(1):"n/a","%","("+lk(e)+")",eK.map(function(k){return e[k];}),eL!=null&&eL>0?"#10B981":"#EF4444",eL!=null&&eL>1?"More employed people means more qualified buyers.":"Employment growth slowing. Some buyers delayed.",eL!=null&&eL>0?"Growing employment supports housing demand.":"Weak job growth may soften demand.");
+  out+=card("Toronto employment growth","Statistics Canada LFS - Toronto CMA YoY %",eL!=null?eL.toFixed(1):"n/a","%","("+lk(e)+")",eK.map(function(k){return e[k];}),eL!=null&&eL>0?"#10B981":"#EF4444",eL!=null&&eL>1?"More employed people means more qualified buyers.":"Employment growth slowing. Some buyers delayed.",eL!=null&&eL>0?"Growing employment supports housing demand.":"Weak job growth may soften demand.",eK,"%");
   var u=ECO_DATA.tor_unemp,uK=Object.keys(u).sort(),uL=lv(u),uC=yc(u);
-  out+=card("Toronto unemployment rate","Statistics Canada LFS - Toronto CMA 3-mo avg",uL!=null?uL.toFixed(1):"n/a","%",uC!=null?(parseFloat(uC)>=0?"+":"")+uC+"% vs yr ago":null,uK.map(function(k){return u[k];}),uL!=null&&uL<7?"#10B981":uL!=null&&uL<9?"#F59E0B":"#EF4444",uL!=null&&uL<7?"Low unemployment. Deep buyer pool.":uL!=null&&uL<9?"Moderate unemployment. Buyers present but selective.":"Elevated unemployment. Smaller buyer pool. More room to negotiate.",uL!=null&&uL<7?"Low unemployment supports demand.":"Higher unemployment reduces qualified buyers. Price competitively.");
+  out+=card("Toronto unemployment rate","Statistics Canada LFS - Toronto CMA 3-mo avg",uL!=null?uL.toFixed(1):"n/a","%",uC!=null?(parseFloat(uC)>=0?"+":"")+uC+"% vs yr ago":null,uK.map(function(k){return u[k];}),uL!=null&&uL<7?"#10B981":uL!=null&&uL<9?"#F59E0B":"#EF4444",uL!=null&&uL<7?"Low unemployment. Deep buyer pool.":uL!=null&&uL<9?"Moderate unemployment. Buyers present but selective.":"Elevated unemployment. Smaller buyer pool. More room to negotiate.",uL!=null&&uL<7?"Low unemployment supports demand.":"Higher unemployment reduces qualified buyers. Price competitively.",uK,"%");
   var c=ECO_DATA.cpi_yoy,cK=Object.keys(c).sort(),cL=lv(c);
-  out+=card("Canada inflation (CPI)","Statistics Canada - all-items CPI YoY %",cL!=null?cL.toFixed(1):"n/a","%","("+lk(c)+")",cK.map(function(k){return c[k];}),cL!=null&&cL<2.5?"#10B981":cL!=null&&cL<5?"#F59E0B":"#EF4444",cL!=null&&cL<2.5?"Near-target inflation. Rate cuts more likely.":"Elevated inflation. Borrowing costs staying higher.",cL!=null&&cL<2.5?"Low inflation supports housing prices.":"High inflation squeezes buyer budgets.");
+  out+=card("Canada inflation (CPI)","Statistics Canada - all-items CPI YoY %",cL!=null?cL.toFixed(1):"n/a","%","("+lk(c)+")",cK.map(function(k){return c[k];}),cL!=null&&cL<2.5?"#10B981":cL!=null&&cL<5?"#F59E0B":"#EF4444",cL!=null&&cL<2.5?"Near-target inflation. Rate cuts more likely.":"Elevated inflation. Borrowing costs staying higher.",cL!=null&&cL<2.5?"Low inflation supports housing prices.":"High inflation squeezes buyer budgets.",cK,"%");
   var o=ECO_DATA.overnight,oK=Object.keys(o).sort(),oL=lv(o),oC=yc(o);
-  out+=card("Bank of Canada overnight rate","Bank of Canada - target policy rate",oL!=null?oL.toFixed(2):"n/a","%",oC!=null?(parseFloat(oC)>=0?"+":"")+oC+"% vs yr ago":null,oK.map(function(k){return o[k];}),oL!=null&&oL<=2.5?"#10B981":oL!=null&&oL<=4?"#F59E0B":"#EF4444",oL!=null&&oL<=2.5?"Low rate. Variable mortgages are cheaper.":oL!=null&&oL<=4?"Rates cutting. Variable rates improving.":"High rate. Fixed rate may offer more certainty.",oL!=null&&oL<=3?"Falling rates bring buyers back to market.":"Higher rates have reduced the buyer pool.");
+  out+=card("Bank of Canada overnight rate","Bank of Canada - target policy rate",oL!=null?oL.toFixed(2):"n/a","%",oC!=null?(parseFloat(oC)>=0?"+":"")+oC+"% vs yr ago":null,oK.map(function(k){return o[k];}),oL!=null&&oL<=2.5?"#10B981":oL!=null&&oL<=4?"#F59E0B":"#EF4444",oL!=null&&oL<=2.5?"Low rate. Variable mortgages are cheaper.":oL!=null&&oL<=4?"Rates cutting. Variable rates improving.":"High rate. Fixed rate may offer more certainty.",oL!=null&&oL<=3?"Falling rates bring buyers back to market.":"Higher rates have reduced the buyer pool.",oK,"%");
   var p=ECO_DATA.prime,pK=Object.keys(p).sort(),pL=lv(p),pC=yc(p);
   var m=ECO_DATA.mortgage5,mK=Object.keys(m).sort(),mL=lv(m),mC=yc(m);
-  out+=card("5-year fixed mortgage rate","Bank of Canada - posted 5-year conventional",mL!=null?mL.toFixed(2):"n/a","%",mC!=null?(parseFloat(mC)>=0?"+":"")+mC+"% vs yr ago":null,mK.map(function(k){return m[k];}),mL!=null&&mL<5?"#10B981":mL!=null&&mL<6?"#F59E0B":"#EF4444",mL!=null&&mL<5?"Under 5%. More buying power than the 2023 peak.":mL!=null&&mL<6?"Elevated but declining. Buying power improving.":"Above 6%. Stress-test your budget carefully.",(mL!=null&&mL<5?"Lower rates bring more buyers.":"Higher rates mean some buyers are waiting.")+" Lenders routinely offer discounts below this posted rate based on your credit profile, down payment, and income — your actual rate may be meaningfully lower. Ask a mortgage broker for a firm quote.");
+  out+=card("5-year fixed mortgage rate","Bank of Canada - posted 5-year conventional",mL!=null?mL.toFixed(2):"n/a","%",mC!=null?(parseFloat(mC)>=0?"+":"")+mC+"% vs yr ago":null,mK.map(function(k){return m[k];}),mL!=null&&mL<5?"#10B981":mL!=null&&mL<6?"#F59E0B":"#EF4444",mL!=null&&mL<5?"Under 5%. More buying power than the 2023 peak.":mL!=null&&mL<6?"Elevated but declining. Buying power improving.":"Above 6%. Stress-test your budget carefully.",(mL!=null&&mL<5?"Lower rates bring more buyers.":"Higher rates mean some buyers are waiting.")+" Lenders routinely offer discounts below this posted rate based on your credit profile, down payment, and income — your actual rate may be meaningfully lower. Ask a mortgage broker for a firm quote.",mK,"%");
   out+='</div><p style="font-size:11px;color:var(--muted);margin-top:8px">Sources: Bank of Canada, Statistics Canada. National and Toronto CMA indicators.</p></div>';
   el.innerHTML=out;
 }
@@ -2046,6 +2150,7 @@ function buildAndPrintCompare(){
     baseRenderCompare();
     styleComparePrintButton();
     wrapAccordion('cmpHealth','Market health signals - compared cities','Side-by-side signals for each selected market, including supply, price momentum, absorption, and days on market.|||https://myshahteam.com/trreb-market-watch-terms-explained-gta-buyers/|||#0C447C|||#e6f1fb|||#378ADD|||What do these mean?|||END','↗',false);
+    wrapAccordion('cmpEco','Economic context','Bank of Canada, inflation, employment, and mortgage-rate signals that affect buyer budgets.|||https://myshahteam.com/economic-indicators-gta-home-buyers-explained/|||#0C447C|||#e6f1fb|||#378ADD|||What do these mean?|||END','$',false);
     wrapAccordion('cmpProfiles','About these cities','Neighbourhood context, schools, transit, and lifestyle fit for selected markets.','i',false);
   };
 
@@ -2263,6 +2368,7 @@ function buildAndPrintCompare(){
         '<div class="market-status-banner '+statusTone+'" style="display:flex;align-items:center;justify-content:center;text-align:center;margin:0;font-size:22px;font-weight:900;text-transform:none;letter-spacing:0;line-height:1.3;padding:12px">'+esc(statusText)+'</div>'+
       '</div>'+
       '<div class="simple-snapshot-grid">'+cards.map(function(c){return '<div class="simple-stat '+esc(c.tone)+'"><div class="simple-stat-label">'+esc(c.label)+'</div><div class="simple-stat-value">'+esc(c.value)+'</div><div class="simple-stat-note">'+esc(c.note)+'</div></div>';}).join('')+'</div>'+
+      '<div style="display:flex;justify-content:flex-end;margin:6px 0 12px"><a href="https://myshahteam.com/mortgage-calculators/" target="_blank" rel="noopener" class="mortgage-cta-pulse" style="display:inline-flex;align-items:center;gap:7px;background:#74c7ee;color:#062b55;border:0;border-radius:6px;padding:9px 18px;font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;text-decoration:none;box-shadow:0 4px 12px rgba(116,199,238,.4);animation:plan-pulse 3s ease-in-out infinite">💰 Calculate Your Mortgage Payment</a></div>'+
       '<details class="simple-details"><summary><span style="flex:1">More market numbers</span><button class="mkt-trends-btn" type="button" onclick="event.preventDefault();event.stopPropagation();var c=document.getElementById(\'chartBox\');if(c)c.scrollIntoView({behavior:\'smooth\',block:\'start\'})">&#9196; Market Trends</button></summary><div class="simple-details-body"><div class="simple-metric-list">'+more.map(function(m){return '<div class="simple-mini"><b>'+esc(m[1])+'</b><span>'+esc(m[0])+' - '+esc(m[2])+'</span></div>';}).join('')+'</div></div></details>';
   };
 
@@ -2467,7 +2573,11 @@ function buildAndPrintCompare(){
   function showPanels(mode){
     var main=document.getElementById('mainPanel'),cmp=document.getElementById('comparePanel'),planner=document.getElementById('plannerPanel');
     var nudge=document.getElementById('plannerNudge');
-    if(nudge)nudge.style.display=(mode==='planner'?'none':'flex');
+    // Always hide the floating compareNudge bubble when switching modes
+    var cn=document.getElementById('compareNudge');if(cn)cn.classList.remove('show');
+    // Reset compareNudge trigger when returning to market mode
+    if(mode==='market'&&typeof window._resetCompareNudge==='function')window._resetCompareNudge();
+    if(nudge)nudge.style.display=(mode==='planner'?'none':'grid');
     if(mode==='planner'){
       // Detect where user is coming FROM before we change anything
       plannerPrevPanel=(cmp&&(cmp.classList.contains('active')||cmp.style.display==='')&&!main.classList.contains('hidden')===false)?'compare':'market';
@@ -2597,6 +2707,8 @@ function buildAndPrintCompare(){
 
         '<details class="planner-assumptions"><summary>How this estimate works</summary><div>This tool uses published market averages or MLS HPI benchmark movement for the selected city and home type. It is not an appraisal of a specific property. Mortgage payment is illustrative only and excludes taxes, condo fees, insurance, closing costs, mortgage insurance, moving costs, and selling costs.</div></details>'+
       '</div>'+
+      '<div id="plannerHealth" style="margin-top:18px"></div>'+
+      '<div id="plannerEco" style="margin-top:14px"></div>'+
       '</div>';
   }
 
@@ -2860,14 +2972,14 @@ function buildAndPrintCompare(){
           var mt=document.getElementById('modeToggle');
           if(mt)[].forEach.call(mt.children,function(b){b.setAttribute('aria-pressed',b.dataset.mode==='compare'?'true':'false');});
           var nudge=document.getElementById('plannerNudge');
-          if(nudge)nudge.style.display='none';
+          if(nudge)nudge.style.display='grid';
         } else {
           if(mp){mp.classList.remove('hidden');mp.style.display='';}
           if(cmp){cmp.classList.remove('active');cmp.style.display='';}
           var mt=document.getElementById('modeToggle');
           if(mt)[].forEach.call(mt.children,function(b){b.setAttribute('aria-pressed',b.dataset.mode==='single'?'true':'false');});
           var nudge=document.getElementById('plannerNudge');
-          if(nudge)nudge.style.display='flex';
+          if(nudge)nudge.style.display='grid';
         }
         window.scrollTo({top:0,behavior:'smooth'});
         return;
@@ -2914,7 +3026,8 @@ function buildAndPrintCompare(){
       }
 
       /* Planner tab in mode toggle */
-      if(e.target&&e.target.dataset&&e.target.dataset.mode==='planner'){
+      var pBtn=e.target&&e.target.closest?e.target.closest('[data-mode="planner"]'):null;
+      if(pBtn){
         e.stopPropagation();
         showPanels('planner');
         return;
@@ -2951,6 +3064,50 @@ function buildAndPrintCompare(){
 
   renderPlannerShell();
   initPlannerEvents();
+  // Hook context render to subsequent renderPlannerShell calls and selection changes
+
+  function renderPlannerContextSections(){
+    var hContainer=document.getElementById('plannerHealth');
+    var eContainer=document.getElementById('plannerEco');
+    if(!hContainer&&!eContainer)return;
+    // Build a 2-city comparison using current sell and buy selections
+    if(hContainer){
+      var sellArea=(document.getElementById('plSellArea')||{}).value;
+      var sellType=(document.getElementById('plSellType')||{}).value;
+      var buyArea=(document.getElementById('plBuyArea')||{}).value;
+      var buyType=(document.getElementById('plBuyType')||{}).value;
+      var as=[];
+      if(sellArea&&sellType){
+        as.push({label:sellArea+' \u00b7 '+sellType,type:sellType,color:SLOT_COLORS[0],data:cmpSeries({area:sellArea,type:sellType})});
+      }
+      if(buyArea&&buyType&&(buyArea!==sellArea||buyType!==sellType)){
+        as.push({label:buyArea+' \u00b7 '+buyType,type:buyType,color:SLOT_COLORS[1],data:cmpSeries({area:buyArea,type:buyType})});
+      }
+      hContainer.innerHTML='<div id="plannerHealthInner"></div>';
+      var inner=document.getElementById('plannerHealthInner');
+      if(as.length>0&&inner)renderConsolidatedHealthCharts(as,inner);
+      wrapAccordion('plannerHealth','Market health \u2014 your sell and buy markets','Side-by-side signals for supply, price momentum, absorption, and days on market for both markets.|||https://myshahteam.com/trreb-market-watch-terms-explained-gta-buyers/|||#0C447C|||#e6f1fb|||#378ADD|||What do these mean?|||END','\u2197',false);
+    }
+    if(eContainer){
+      renderEconomicIndicators('plannerEco','monthly');
+      wrapAccordion('plannerEco','Economic context','Bank of Canada, inflation, employment, and mortgage-rate signals that affect buyer budgets.|||https://myshahteam.com/economic-indicators-gta-home-buyers-explained/|||#0C447C|||#e6f1fb|||#378ADD|||What do these mean?|||END','$',false);
+    }
+  }
+
+  // Re-render context sections after shell + when sell/buy area changes
+  var origRenderPlannerShell=renderPlannerShell;
+  renderPlannerShell=function(){
+    origRenderPlannerShell.apply(this,arguments);
+    setTimeout(renderPlannerContextSections,50);
+  };
+  document.addEventListener('change',function(e){
+    if(!e.target)return;
+    if(e.target.id==='plSellArea'||e.target.id==='plSellType'||e.target.id==='plBuyArea'||e.target.id==='plBuyType'){
+      setTimeout(renderPlannerContextSections,50);
+    }
+  });
+  // Initial render of context sections
+  setTimeout(renderPlannerContextSections,100);
 
   function latestCompareRow(s){
     var rows=cmpSeries(s).filter(function(d){return d.price!=null;});
@@ -3017,27 +3174,32 @@ function buildAndPrintCompare(){
   function initCompareNudge(){
     ensureCompareNudge();
     var shown=false,dismissed=false;
+    window._resetCompareNudge=function(){if(!dismissed)shown=false;};
     function showNudge(){
       var n=document.getElementById('compareNudge');
       if(!n||dismissed)return;
+      var cmp=document.getElementById('comparePanel');
+      var planner=document.getElementById('plannerPanel');
+      if((cmp&&cmp.classList.contains('active'))||(planner&&planner.classList.contains('active')))return;
       n.classList.add('show');
       shown=true;
       // Auto-dismiss after 5 seconds
       setTimeout(function(){
         n.classList.remove('show');
-        // Reset so it can reappear after 40s on next scroll trigger
+        // Reset so it can reappear after 40s on next trigger
         setTimeout(function(){if(!dismissed)shown=false;},40000);
       },5000);
     }
+    // PRIMARY: time-based trigger fires after 6 seconds in market mode
+    setTimeout(function(){if(!shown&&!dismissed)showNudge();},6000);
+    // SECONDARY: scroll trigger as fallback
     window.addEventListener('scroll',function(){
       if(shown||dismissed)return;
       var cmp=document.getElementById('comparePanel');
       var planner=document.getElementById('plannerPanel');
       if((cmp&&cmp.classList.contains('active'))||(planner&&planner.classList.contains('active')))return;
-      var grid=document.querySelector('.simple-snapshot-grid');
-      if(!grid)return;
-      var rect=grid.getBoundingClientRect();
-      if(rect.bottom<window.innerHeight*.62)showNudge();
+      var scrolled=window.scrollY||window.pageYOffset;
+      if(scrolled>300)showNudge();
     },{passive:true});
     document.addEventListener('click',function(e){
       if(e.target&&e.target.classList.contains('nudge-close')){
@@ -3061,6 +3223,171 @@ function buildAndPrintCompare(){
     renderCompareMetricTable();
   };
   initCompareNudge();
+
+  /* ============ SPARKLINE HOVER TOOLTIPS ============ */
+  /* Show value+date on hover over Market Health and Economic Context sparklines */
+  (function(){
+    var tip=null;
+    function getTip(){
+      if(tip)return tip;
+      tip=document.createElement('div');
+      tip.className='spark-tip';
+      document.body.appendChild(tip);
+      return tip;
+    }
+    // Shared formatters used by both single-line and multi-line tooltips
+    var MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    function fmtDateLabel(raw){
+      if(!raw)return '';
+      // Handle YYYY-MM format
+      var ym=raw.match(/^(\d{4})-(\d{1,2})$/);
+      if(ym){var mi=parseInt(ym[2],10)-1;return (MONTHS[mi]||ym[2])+' '+ym[1];}
+      // Handle YYYY-Q format
+      var yq=raw.match(/^(\d{4})-Q(\d)/i);
+      if(yq)return 'Q'+yq[2]+' '+yq[1];
+      // Pass through anything else
+      return raw;
+    }
+    function fmtNumber(val,unit){
+      if(val==null||isNaN(val))return 'n/a';
+      var u=(unit||'').trim();
+      // Days: round, drop the d, append " days"
+      if(u==='d'||u==='days'||u==='day')return Math.round(val)+' days';
+      // Currency
+      if(u==='$'||u==='CAD')return '$'+Math.round(val).toLocaleString();
+      // Percent: 2 decimals, no space
+      if(u==='%')return val.toFixed(2)+'%';
+      // mo, units with prefix space
+      if(u==='mo'||u==='listings/sale'||u==='listings per sale')return val.toFixed(2)+' '+u;
+      // Generic: 2 decimals + unit attached
+      return val.toFixed(2)+u;
+    }
+    function attach(svg){
+      if(svg.dataset.hoverAttached)return;
+      svg.dataset.hoverAttached='1';
+      // Parse data points from the SVG path
+      var path=svg.querySelector('path[stroke]');
+      if(!path)return;
+      var d=path.getAttribute('d')||'';
+      var coords=[];
+      d.split(/[ML]/).forEach(function(seg){
+        seg=seg.trim();if(!seg)return;
+        var p=seg.split(/[, ]+/);
+        if(p.length>=2){
+          var x=parseFloat(p[0]),y=parseFloat(p[1]);
+          if(!isNaN(x)&&!isNaN(y))coords.push({x:x,y:y});
+        }
+      });
+      if(coords.length<2)return;
+      // Read the actual data values from a data attribute we'll add
+      var vals=svg.dataset.vals?svg.dataset.vals.split('|').map(function(v){return v===''?null:parseFloat(v);}):null;
+      var labels=svg.dataset.labels?svg.dataset.labels.split('|'):null;
+      var unit=svg.dataset.unit||'';
+      var card=svg.closest('.health-card');
+      svg.addEventListener('mousemove',function(ev){
+        var rect=svg.getBoundingClientRect();
+        var px=(ev.clientX-rect.left)/rect.width*100;
+        // Find nearest coord
+        var best=coords[0],bestDist=Infinity;
+        coords.forEach(function(c){var dd=Math.abs(c.x-px);if(dd<bestDist){bestDist=dd;best=c;}});
+        if(!best)return;
+        // Find the index for this coord
+        var idx=coords.indexOf(best);
+        var realIdx=-1;
+        if(vals){
+          var nonNull=0;
+          for(var i=0;i<vals.length;i++){
+            if(vals[i]!=null){if(nonNull===idx){realIdx=i;break;}nonNull++;}
+          }
+        }
+        var t=getTip();
+        var val=(vals&&realIdx>=0&&vals[realIdx]!=null)?vals[realIdx]:null;
+        var lbl=(labels&&realIdx>=0)?labels[realIdx]:'';
+        if(val==null){t.classList.remove('show');return;}
+        t.style.padding='';
+        var valStr=fmtNumber(val,unit);
+        t.innerHTML=(lbl?'<div style="font-size:10px;opacity:.75;font-weight:600;margin-bottom:2px;text-align:right">'+fmtDateLabel(lbl)+'</div>':'')+'<div style="font-size:14px;font-weight:500;text-align:right">'+valStr+'</div>';
+        var svgRect=svg.getBoundingClientRect();
+        var dotX=svgRect.left+window.scrollX+(best.x/100)*svgRect.width;
+        var dotY=svgRect.top+window.scrollY+(best.y/30)*svgRect.height;
+        t.style.left=dotX+'px';
+        t.style.top=dotY+'px';
+        t.classList.add('show');
+      });
+      svg.addEventListener('mouseleave',function(){
+        if(tip)tip.classList.remove('show');
+      });
+    }
+    // ── COMPARE HEALTH CHARTS (multi-line) ──
+    function attachCmpHC(svg){
+      if(svg.dataset.hoverAttached)return;
+      svg.dataset.hoverAttached='1';
+      var lines=svg.querySelectorAll('.cmphc-line');
+      if(!lines.length)return;
+      // Parse all line data once
+      var seriesData=[];
+      lines.forEach(function(ln){
+        var vals=(ln.getAttribute('data-vals')||'').split('|').map(function(v){return v===''?null:parseFloat(v);});
+        var labels=(ln.getAttribute('data-labels')||'').split('|');
+        var unit=ln.getAttribute('data-unit')||'';
+        var fmtKey=ln.getAttribute('data-fmt')||'';
+        var city=ln.getAttribute('data-city')||'';
+        var color=ln.getAttribute('data-color')||'#000';
+        seriesData.push({vals:vals,labels:labels,unit:unit,fmtKey:fmtKey,city:city,color:color});
+      });
+      function fmtVal(v,unit,fmtKey){
+        if(v==null||isNaN(v))return 'n/a';
+        if(fmtKey==='moi')return v.toFixed(2)+' mo';
+        if(fmtKey==='splp')return v.toFixed(2)+'%';
+        if(fmtKey==='dom')return Math.round(v)+' days';
+        if(fmtKey==='sales')return v>=1000?(v/1000).toFixed(2)+'K':Math.round(v).toString();
+        return fmtNumber(v,unit);
+      }
+      function fmtMonth(ym){
+        if(!ym)return '';
+        var p=ym.split('-');if(p.length<2)return ym;
+        var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var mi=parseInt(p[1],10)-1;
+        return (months[mi]||p[1])+' '+p[0].slice(2);
+      }
+      svg.addEventListener('mousemove',function(ev){
+        var rect=svg.getBoundingClientRect();
+        var px=(ev.clientX-rect.left)/rect.width;
+        if(px<0||px>1){if(tip)tip.classList.remove('show');return;}
+        // Determine index in data based on position
+        var n=seriesData[0].vals.length;
+        var idx=Math.round(px*(n-1));
+        if(idx<0)idx=0;if(idx>=n)idx=n-1;
+        // Build tooltip with all cities at this point
+        var lbl=fmtDateLabel(seriesData[0].labels[idx]||'');
+        var rows=seriesData.map(function(s){
+          var v=s.vals[idx];
+          return '<div style="display:flex;align-items:center;gap:6px;font-size:11.5px;margin-top:3px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+s.color+'"></span><span style="opacity:.85">'+s.city+':</span> <span style="margin-left:auto;font-weight:500">'+fmtVal(v,s.unit,s.fmtKey)+'</span></div>';
+        }).join('');
+        var t=getTip();
+        t.style.padding='8px 11px';
+        t.innerHTML='<div style="font-size:11px;font-weight:700;opacity:.85;margin-bottom:2px;text-align:right">'+lbl+'</div>'+rows;
+        var dotX=rect.left+window.scrollX+px*rect.width;
+        var dotY=rect.top+window.scrollY+rect.height*.5;
+        t.style.left=dotX+'px';
+        t.style.top=dotY+'px';
+        t.classList.add('show');
+      });
+      svg.addEventListener('mouseleave',function(){
+        if(tip)tip.classList.remove('show');
+        // Reset tooltip padding for sparklines
+        if(tip)tip.style.padding='';
+      });
+    }
+    // Watch for new sparklines being added
+    function scan(){
+      [].forEach.call(document.querySelectorAll('.hc-sparkline'),attach);
+      [].forEach.call(document.querySelectorAll('.cmphc-chart'),attachCmpHC);
+    }
+    scan();
+    var mo=new MutationObserver(function(){scan();});
+    mo.observe(document.body,{childList:true,subtree:true});
+  })();
 
   /* Hide nudge whenever any select is open */
   document.addEventListener('focus',function(e){
